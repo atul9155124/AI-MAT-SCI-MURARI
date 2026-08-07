@@ -29,6 +29,7 @@
  ├── 📓 Module 1 S04.ipynb
  ├── 📓 Module 1 S05.ipynb
  ├── 📓 Module 1 S06.ipynb
+ ├── 📓 Module 1 S07.ipynb
  └── 📄 README.md
 ```
 
@@ -137,6 +138,22 @@
 
 ✔ Learn professional project management using Git with AI notebooks.
 
+---
+
+## 📓 Module 1 S07.ipynb
+
+### 🔥 Materials Project API Setup
+
+✨ Topics Covered
+
+- Materials Project API
+- API Key Configuration
+- MPRester Initialization
+- Environment Variables (.env)
+
+🎯 Learning Outcome
+
+✔ Learn how to configure and connect to the Materials Project API using Python.
 ---
 
 # 🛠 Technologies Used
