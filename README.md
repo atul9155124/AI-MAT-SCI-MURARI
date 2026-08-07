@@ -154,6 +154,24 @@
 🎯 Learning Outcome
 
 ✔ Learn how to configure and connect to the Materials Project API using Python.
+
+---
+
+## 📓 Module 1 S08.ipynb
+
+### 🔥 Materials Data Retrieval and Visualization
+
+✨ Topics Covered
+
+- Materials Project API
+- Data Retrieval
+- Pandas DataFrame
+- Data Visualization
+
+🎯 Learning Outcome
+
+✔ Learn how to retrieve materials data from the Materials Project API and visualize it using Python.
+
 ---
 
 # 🛠 Technologies Used
