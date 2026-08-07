@@ -30,6 +30,7 @@
  ├── 📓 Module 1 S05.ipynb
  ├── 📓 Module 1 S06.ipynb
  ├── 📓 Module 1 S07.ipynb
+ ├── 📓 Module 1 S08.ipynb
  └── 📄 README.md
 ```
 
