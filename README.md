@@ -303,9 +303,6 @@ perovskites_data.csv → Domain Cleaning (Bandgap ≤ 20 eV) → df_clean → Co
 **Module 2 — Data Engineering & Analysis**
 ![](https://progress-bar.dev/100/?title=Complete&width=400&color=8A2BE2)
 
-**Module 3 — Machine Learning** *(coming soon)*
-![](https://progress-bar.dev/0/?title=Planned&width=400&color=cccccc)
-
 </div>
 
 ### Module 1
