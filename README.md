@@ -1,30 +1,37 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=220&section=header&text=AI%20Material%20Science%20Lab&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Python%20%7C%20Materials%20Project%20API%20%7C%20Machine%20Learning&descAlignY=58&descSize=16" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=250&section=header&text=AI%20Material%20Science%20Lab&fontSize=44&fontColor=ffffff&animation=twinkling&fontAlignY=32&desc=Python%20%7C%20Materials%20Project%20API%20%7C%20Machine%20Learning&descAlignY=52&descSize=18" width="100%"/>
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=24&pause=1000&color=00C2FF&center=true&vCenter=true&width=700&lines=Welcome+to+AI+Material+Science+Labs!;Python+for+Material+Engineering;Materials+Project+API+%2B+Machine+Learning" />
+<img src="https://user-images.githubusercontent.com/74038190/221857939-89486d0f-a56a-4a8c-9a30-90b57e1b3936.gif" width="160">
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=26&pause=1000&color=00C2FF&center=true&vCenter=true&width=750&lines=Welcome+to+AI+Material+Science+Labs!;Python+for+Material+Engineering;Materials+Project+API+%2B+Machine+Learning;Learn+by+Hands-on+Jupyter+Notebooks+%F0%9F%9A%80" />
 
 <br/>
 
-<img src="https://skillicons.dev/icons?i=python,anaconda,git,github&theme=dark" />
+<a href="https://skillicons.dev">
+  <img src="https://skillicons.dev/icons?i=python,anaconda,git,github&theme=dark" />
+</a>
 
 <br/><br/>
 
-<img src="https://img.shields.io/badge/Pandas-Data%20Analysis-1a1a1a?style=flat-square&logo=pandas&logoColor=white" height="26"/>
-<img src="https://img.shields.io/badge/NumPy-Scientific%20Computing-1a1a1a?style=flat-square&logo=numpy&logoColor=white" height="26"/>
-<img src="https://img.shields.io/badge/Matplotlib-Visualization-1a1a1a?style=flat-square&logoColor=white" height="26"/>
-<img src="https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-1a1a1a?style=flat-square&logo=scikitlearn&logoColor=white" height="26"/>
-<img src="https://img.shields.io/badge/Jupyter-Notebook-1a1a1a?style=flat-square&logo=jupyter&logoColor=white" height="26"/>
+<img src="https://img.shields.io/badge/Pandas-Data%20Analysis-000000?style=for-the-badge&logo=pandas&logoColor=white&labelColor=1a1a1a" height="28"/>
+<img src="https://img.shields.io/badge/NumPy-Scientific%20Computing-000000?style=for-the-badge&logo=numpy&logoColor=white&labelColor=1a1a1a" height="28"/>
+<img src="https://img.shields.io/badge/Matplotlib-Visualization-000000?style=for-the-badge&logoColor=white&labelColor=1a1a1a" height="28"/>
+<img src="https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-000000?style=for-the-badge&logo=scikitlearn&logoColor=white&labelColor=1a1a1a" height="28"/>
+<img src="https://img.shields.io/badge/Jupyter-Notebook-000000?style=for-the-badge&logo=jupyter&logoColor=white&labelColor=1a1a1a" height="28"/>
 
 <br/><br/>
 
 <img src="https://img.shields.io/static/v1?label=MODULES&message=2&color=00C2FF&style=for-the-badge&labelColor=0d1117"/>
 <img src="https://img.shields.io/static/v1?label=NOTEBOOKS&message=12&color=8A2BE2&style=for-the-badge&labelColor=0d1117"/>
 <img src="https://img.shields.io/static/v1?label=STATUS&message=ACTIVE&color=00C2FF&style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/static/v1?label=UPDATED&message=2026&color=8A2BE2&style=for-the-badge&labelColor=0d1117"/>
 
 <br/><br/>
 
 > 📚 Practical AI & Material Science notebooks for learning Python, data analysis, material properties, scientific visualization, and the Materials Project API.
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="450">
 
 </div>
 
@@ -59,9 +66,13 @@
 
 ## 📘 Notebook Overview
 
+<div align="center">
+<img src="https://user-images.githubusercontent.com/74038190/229223263-cf2c4b07-6100-4b32-a994-6da6f2477ce9.gif" width="160">
+
 ### 🔵 Module 1 — Python & Material Science Fundamentals
 
 ![](https://progress-bar.dev/100/?title=Complete&width=350&color=00C2FF)
+</div>
 
 <details open>
 <summary><b>📓 S01 — 🏗️ Material Properties using Python</b></summary>
@@ -137,9 +148,15 @@
 
 <br>
 
+<br>
+
+<div align="center">
+<img src="https://user-images.githubusercontent.com/74038190/213910845-af37a709-8995-40d6-be59-724526e3c3d7.gif" width="400">
+
 ### 🟣 Module 2 — Materials Data Engineering & Analysis
 
 ![](https://progress-bar.dev/100/?title=Complete&width=350&color=8A2BE2)
+</div>
 
 <details open>
 <summary><b>📓 S01 — 🔬 Materials Project Data Retrieval & Dataset Creation</b></summary>
@@ -304,10 +321,14 @@ flowchart TD
 
 ## ⭐ If you found this repository useful, don't forget to Star it!
 
+<img src="https://user-images.githubusercontent.com/74038190/221857984-d3d7e6e2-d55f-4a1c-9e11-25b91e19e5f2.gif" width="110">
+
 ### Happy Learning 🚀
+
+### 🧪 AI • Materials • Data • Python • Machine Learning
 
 **Made with 💙 by Murari Singh**
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=140&section=footer&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=160&section=footer&animation=twinkling" width="100%"/>
 
 </div>
