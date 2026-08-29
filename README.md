@@ -63,17 +63,17 @@
  │   │   └── 📓 Module 2 S05.ipynb
  │   │
  │   ├── 📊 Data
- │   │   │
- │   │   ├── 🔵 Perovskite Materials Data (S01-S04)
- │   │   │   ├── 📊 perovskites_data.csv
- │   │   │   ├── 📊 cleaned_materials_dataset.csv
- │   │   │   └── 📄 perovskites_report.html
- │   │   │
- │   │   └── 🟣 Heat Capacity Data (S05)
- │   │       ├── 📊 cp_data_demo.csv (Input)
- │   │       └── 📊 cleaned_cp_dataset.csv (Output)
- │   │
- │   └── 📄 README.md
+ │       │
+ │       ├── 🔵 Perovskite Materials Data (S01-S04)
+ │       │   ├── 📊 perovskites_data.csv
+ │       │   ├── 📊 cleaned_materials_dataset.csv
+ │       │   └── 📄 perovskites_report.html
+ │       │
+ │       └── 🟣 Heat Capacity Data (S05)
+ │           ├── 📊 cp_data_demo.csv (Input)
+ │           └── 📊 cleaned_cp_dataset.csv (Output)
+ │   
+ │   
  │
  └── 📄 README.md
 ```
