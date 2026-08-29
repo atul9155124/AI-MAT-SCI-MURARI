@@ -413,7 +413,7 @@ Visualization and statistical analysis include **distribution histograms**, **Q-
 
 **1️⃣ Clone the Repository**
 ```bash
-git clone <repository-url>
+git clone https://github.com/atul9155124/AI-MAT-SCI-MURARI.git
 ```
 
 **2️⃣ Enter the Repository**
