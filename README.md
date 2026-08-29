@@ -273,14 +273,14 @@ Duplicate Detection (Formula) → Boxplot (Bandgap) → IQR Bounds → Flagged O
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
 <img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Domain-Driven%20Data%20Cleaning-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Physical%20Plausibility%20Filtering-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Correlation%20Heatmap-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Feature%20Relationships-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-The notebook (Session 12) reloads `perovskites_data.csv` and applies **domain-driven cleaning**, filtering out physically implausible band gap values (> 20 eV) to produce a cleaned `df_clean`. It then selects numeric columns (`Bandgap`, `Formation_Energy`, `Volume`) and generates a **correlation heatmap** with Seaborn. The finalized dataset is exported as `cleaned_materials_dataset.xls`.
+The notebook (Session 12) reloads `perovskites_data.csv` and applies **domain-driven cleaning**, filtering out physically implausible band gap values (> 20 eV) to produce a cleaned `df_clean`. It then selects numeric columns (`Bandgap`, `Formation_Energy`, `Volume`) and generates a **correlation heatmap** with Seaborn. The finalized dataset is exported as `cleaned_materials_dataset.csv`.
 
 ```text
 perovskites_data.csv 
   ↓ (S02-S03: Profiling, Imputation, Outlier Detection)
   ↓ (S04: Domain Cleaning - Bandgap ≤ 20 eV)
   ↓ (Correlation Analysis)
-cleaned_materials_dataset.xls ✅
+cleaned_materials_dataset.csv ✅
 ```
 
 <img src="https://img.shields.io/badge/-Learning%20Outcome-0d1117?style=flat-square&color=8A2BE2"/>
@@ -300,7 +300,7 @@ cleaned_materials_dataset.xls ✅
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
 <img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Heat%20Capacity%20Data-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Temperature%20Dependent%20Properties-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Column%20Standardization-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Physical%20Constraint%20Filtering-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Distribution%20Analysis-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Q-Q%20Plot%20Normality%20Testing-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Cp%20vs%20Temperature%20Trends-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Material%20Family%20Classification-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-The notebook loads `cp_data_demo.csv` (4,577 rows) containing heat capacity measurements across different materials and temperatures. It standardizes column names to a **canonical schema** (`formula`, `T`, `Cp`), removes rows with missing values, filters physically implausible data (T < 0 or Cp < 0), and exports a cleaned dataset `cleaned_cp_dataset.xls` (4,564 rows).
+The notebook loads `cp_data_demo.csv` (4,577 rows) containing heat capacity measurements across different materials and temperatures. It standardizes column names to a **canonical schema** (`formula`, `T`, `Cp`), removes rows with missing values, filters physically implausible data (T < 0 or Cp < 0), and exports a cleaned dataset `cleaned_cp_dataset.csv` (4,564 rows).
 
 Visualization and statistical analysis include **distribution histograms**, **Q-Q plots** for normality assessment, **multi-material temperature trends**, and **material-family classification** (Oxide, Carbide, etc.) to prepare data for predictive modeling.
 
@@ -313,7 +313,7 @@ Visualization and statistical analysis include **distribution histograms**, **Q-
   ↓ (Q-Q Plot Normality Check)
   ↓ (Multi-material Temperature Trends)
   ↓ (Material Family Classification)
-📤 cleaned_cp_dataset.xls (4,564 rows) ✅
+📤 cleaned_cp_dataset.csv (4,564 rows) ✅
 ```
 
 **Data Quality Metrics:**
@@ -335,7 +335,7 @@ Visualization and statistical analysis include **distribution histograms**, **Q-
 | File | Type | Rows | Size | Description |
 |------|------|------|------|-------------|
 | `cp_data_demo.csv` | 📥 Input | 4,577 | 86.9 KB | Raw heat capacity dataset (demo) |
-| `cleaned_cp_dataset.xls` | 📤 Output | 4,564 | 95.6 KB | Cleaned, standardized, validated dataset |
+| `cleaned_cp_dataset.csv` | 📤 Output | 4,564 | 95.6 KB | Cleaned, standardized, validated dataset |
 
 **Output Dataset Schema (`cleaned_cp_dataset.xls`):**
 
@@ -380,8 +380,8 @@ Visualization and statistical analysis include **distribution histograms**, **Q-
 | **S01** | Materials Project API | `perovskites_data.csv` | - | - |
 | **S02** | `perovskites_data.csv` | Data profiles | - | - |
 | **S03** | `perovskites_data.csv` | Outlier analysis | - | - |
-| **S04** | `perovskites_data.csv` | `cleaned_materials_dataset.xls` ✅ | 291.7 KB | 4,719 |
-| **S05** | `cp_data_demo.csv` | `cleaned_cp_dataset.xls` ✅ | 95.6 KB | 4,564 |
+| **S04** | `perovskites_data.csv` | `cleaned_materials_dataset.csv` ✅ | 291.7 KB | 4,719 |
+| **S05** | `cp_data_demo.csv` | `cleaned_cp_dataset.csv` ✅ | 95.6 KB | 4,564 |
 
 **Legend:** ✅ = ML-Ready | 📥 = Input | 📤 = Output
 
@@ -437,11 +437,11 @@ Place downloaded data files in the correct module directories:
 ```bash
 # Perovskite Materials (S01-S04)
 Module_2/Data/perovskites_data.csv
-Module_2/Data/cleaned_materials_dataset.xls
+Module_2/Data/cleaned_materials_dataset.csv
 
 # Heat Capacity (S05)
 Module_2/Data/cp_data_demo.csv
-Module_2/Data/cleaned_cp_dataset.xls
+Module_2/Data/cleaned_cp_dataset.csv
 ```
 
 **5️⃣ Start Jupyter Notebook**
@@ -456,7 +456,7 @@ Open the notebooks and execute the cells one by one. 🎉
 2. Progress to Module 2 S01 (API data retrieval)
 3. Follow S02-S04 for perovskite materials cleaning pipeline
 4. Complete S05 for heat capacity analysis
-5. Use `cleaned_materials_dataset.xls` and `cleaned_cp_dataset.xls` for ML projects
+5. Use `cleaned_materials_dataset.csv` and `cleaned_cp_dataset.csv` for ML projects
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
@@ -476,14 +476,14 @@ flowchart TD
     L2 --> O["📓 Module 2 S04<br/>Domain Cleaning"]
     O --> O2["Bandgap ≤ 20 eV<br/>Correlation Heatmap"]
     
-    O2 --> CLEAN1["✅ cleaned_materials_dataset.xls<br/>(4,719 rows)<br/>ML-Ready: Perovskites"]
+    O2 --> CLEAN1["✅ cleaned_materials_dataset.csv<br/>(4,719 rows)<br/>ML-Ready: Perovskites"]
     
     R["📓 Module 2 S05<br/>Heat Capacity Analysis"] --> S["📊 cp_data_demo.csv<br/>(4,577 rows)<br/>Input Data"]
     
     S --> T["Schema Standardization<br/>Formula→formula<br/>Temperature→T"]
     T --> U["Physical Constraint Filter<br/>T ≥ 0 K<br/>Cp ≥ 0 J/mol·K"]
     U --> V["Distribution Analysis<br/>Q-Q Normality Check<br/>Material Classification"]
-    V --> CLEAN2["✅ cleaned_cp_dataset.xls<br/>(4,564 rows)<br/>ML-Ready: Heat Capacity"]
+    V --> CLEAN2["✅ cleaned_cp_dataset.csv<br/>(4,564 rows)<br/>ML-Ready: Heat Capacity"]
     
     CLEAN1 --> ML["🤖 Machine Learning<br/>Feature Engineering<br/>Model Training"]
     CLEAN2 --> ML
@@ -506,7 +506,7 @@ flowchart TD
 | File | Type | Rows | Columns | Size | Purpose |
 |------|------|------|---------|------|---------|
 | `perovskites_data.csv` | CSV | - | Material_ID, Formula, Bandgap, Formation_Energy, Volume | - | Input data from Materials Project API (S01) |
-| `cleaned_materials_dataset.xls` | Data Table | 4,719 | Material_ID, Formula, Bandgap, Formation_Energy, Volume | 291.7 KB | **Output:** Cleaned & processed materials dataset after domain filtering (S01-S04) |
+| `cleaned_materials_dataset.csv` | Data Table | 4,719 | Material_ID, Formula, Bandgap, Formation_Energy, Volume | 291.7 KB | **Output:** Cleaned & processed materials dataset after domain filtering (S01-S04) |
 | `perovskites_report.html` | Report | - | - | - | Automated profiling report with data quality metrics (S02) |
 
 **Data Flow:**
@@ -515,7 +515,7 @@ Materials Project API → perovskites_data.csv
   ↓ (S02: Profiling & Imputation)
   ↓ (S03: Duplicate & Outlier Detection)
   ↓ (S04: Domain Cleaning & Correlation)
-cleaned_materials_dataset.xls ✅
+cleaned_materials_dataset.csv ✅
 ```
 
 ---
@@ -525,7 +525,7 @@ cleaned_materials_dataset.xls ✅
 | File | Type | Rows | Columns | Size | Purpose |
 |------|------|------|---------|------|---------|
 | `cp_data_demo.csv` | **Input** | 4,577 | Formula, Temperature, Heat_Capacity | 86.9 KB | Raw heat capacity demo dataset loaded in S05 |
-| `cleaned_cp_dataset.xls` | **Output** | 4,564 | formula, T, Cp | 95.6 KB | **Output:** Cleaned, standardized, and validated heat capacity dataset (S05) |
+| `cleaned_cp_dataset.csv` | **Output** | 4,564 | formula, T, Cp | 95.6 KB | **Output:** Cleaned, standardized, and validated heat capacity dataset (S05) |
 
 **Data Flow:**
 ```
@@ -535,7 +535,7 @@ cp_data_demo.csv (Raw)
   ↓ (Distribution Analysis)
   ↓ (Q-Q Normality Check)
   ↓ (Material Classification)
-cleaned_cp_dataset.xls ✅
+cleaned_cp_dataset.csv ✅
 ```
 
 **Data Quality Summary (S05):**
@@ -561,7 +561,7 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 │   Contents: Material properties (Bandgap, Formation Energy, Volume)
 │   Purpose: Raw data for cleaning pipeline
 │
-├── 📊 cleaned_materials_dataset.xls ✅ [ML-READY]
+├── 📊 cleaned_materials_dataset.csv ✅ [ML-READY]
 │   Size: 291.7 KB | Rows: 4,719 | Columns: 5
 │   Output from: S01 (API) → S02 (Profiling) → S03 (Outliers) → S04 (Cleaning)
 │   Columns: Material_ID, Formula, Bandgap, Formation_Energy, Volume
@@ -587,7 +587,7 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 │   Original Columns: Formula, Temperature, Heat_Capacity
 │   Purpose: Raw input for S05 cleaning pipeline
 │
-└── 📊 cleaned_cp_dataset.xls ✅ [ML-READY]
+└── 📊 cleaned_cp_dataset.csv ✅ [ML-READY]
     Size: 95.6 KB | Rows: 4,564 | Columns: 3
     Output from: Input standardization → Physical filtering → Validation
     Standardized Columns: formula, T, Cp
