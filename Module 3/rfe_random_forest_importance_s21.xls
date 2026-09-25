@@ -1,0 +1,21 @@
+Feature,Importance
+MagpieData mean Row,0.42457696935421785
+MagpieData maximum Electronegativity,0.182050203629015
+MagpieData mean NpUnfilled,0.09464520128373397
+MagpieData avg_dev NpUnfilled,0.06356389405365383
+MagpieData mode Electronegativity,0.06013009401974047
+MagpieData maximum NpValence,0.04502146935158861
+MagpieData range Electronegativity,0.040627541118770184
+MagpieData minimum NpUnfilled,0.03226120048265938
+MagpieData mode NsUnfilled,0.023656771779418436
+MagpieData maximum Row,0.01049931379221767
+MagpieData maximum NsValence,0.008680575346763744
+MagpieData avg_dev NUnfilled,0.005035865272925279
+MagpieData range NUnfilled,0.0025205410779044757
+MagpieData mean NdUnfilled,0.0022877797293902485
+MagpieData maximum NdUnfilled,0.002191765978456523
+MagpieData minimum NUnfilled,0.0021736578787476092
+MagpieData maximum GSmagmom,3.289345138581549e-05
+MagpieData range GSmagmom,2.8639692555482578e-05
+MagpieData mean GSmagmom,1.5622706855561866e-05
+MagpieData minimum NdUnfilled,2.741357634332817e-18
