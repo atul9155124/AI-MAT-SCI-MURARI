@@ -23,14 +23,14 @@
 
 <br/><br/>
 
-<img src="https://img.shields.io/static/v1?label=MODULES&message=3&color=00C2FF&style=for-the-badge&labelColor=0d1117"/>
-<img src="https://img.shields.io/static/v1?label=NOTEBOOKS&message=18&color=8A2BE2&style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/static/v1?label=MODULES&message=4&color=00C2FF&style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/static/v1?label=NOTEBOOKS&message=23&color=8A2BE2&style=for-the-badge&labelColor=0d1117"/>
 <img src="https://img.shields.io/static/v1?label=STATUS&message=ACTIVE&color=00C2FF&style=for-the-badge&labelColor=0d1117"/>
 <img src="https://img.shields.io/static/v1?label=UPDATED&message=2026&color=8A2BE2&style=for-the-badge&labelColor=0d1117"/>
 
 <br/>
 
-> 📚 Practical AI & Material Science notebooks for learning Python programming, data analysis, material properties, scientific visualization, Materials Project API, and machine-learning-ready data processing.
+> 📚 Practical AI & Material Science notebooks for learning Python programming, data analysis, material properties, scientific visualization, Materials Project API, machine-learning-ready data processing, and regression modeling.
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="500">
 
@@ -64,7 +64,7 @@
  │   │   ├── 📓 Module 2 S06.ipynb
  │   │   └── 📓 Module 2 S07.ipynb
  │   │
- │   ├── 📊 Data
+ │   └── 📊 Data
  │       │
  │       ├── 🔵 Perovskite Materials Data (S01-S04)
  │       │   ├── 📊 perovskites_data.csv
@@ -75,42 +75,52 @@
  │           ├── 📊 cp_data_demo.csv (Input)
  │           └── 📊 cleaned_cp_dataset.csv (Output)
  │
- └── 📁 Module_3
-     │
-     ├── 📓 Notebooks
-     │   ├── 📓 Module 3 S01.ipynb
-     │   ├── 📓 Module 3 S02.ipynb
-     │   ├── 📓 Module 3 S03.ipynb
-     │   ├── 📓 Module 3 S04.ipynb
-     │   ├── 📓 Module 3 S05.ipynb
-     │   ├── 📓 Module 3 S06.ipynb
-     │   └── 📓 Module 3 S07.ipynb
-     │
-     ├── 📊 Data
-         │
-         ├── 🟠 Elemental Features & ML Preparation (S01)
-         │   ├── 📊 cleaned_cp_dataset.csv (Input)
-         │   ├── 📊 elemental_feature_vectors.csv (Output)
-         │   └── 📊 materials_feature_matrix.csv (Output)
-         │
-         ├── 🟠 CBFV Featurization, Magpie Properties (S03-S04)
-         │   ├── 📊 cleaned_cp_dataset.csv (Input)
-         │   └── 📊 cbfv_features.xls / cbfv_features.csv (Output — 4,564 rows × 133 cols)
-         │
-         ├── 🟠 Matminer Featurization, Magpie & Deml (S05)
-         │   ├── 📊 cleaned_cp_dataset.csv (Input)
-         │   ├── 📊 matminer_magpie_features.csv (Output — 4,564 rows × 133 cols)
-         │   └── 📊 matminer_deml_features.csv (Output — 4,564 rows × 81 cols)
-         │
-         ├── 🟠 RFE + Random Forest Feature Selection (S06)
-         │   ├── 📊 filtered_features_s20.csv (Input — 4,564 rows × 96 cols)
-         │   ├── 📊 curated_features_s21.csv (Output — 4,564 rows × 21 cols)
-         │   └── 📊 rfe_random_forest_importance_s21.csv (Output — top-20 importances)
-         │
-         └── 🟠 Structural Featurization via Materials Project (S07)
-             ├── 📊 perovskites_data.csv (Input — 4,719 rows)
-             └── 📊 structural_features_s22.csv (Output — SiteStatsFingerprint + Bag of Bonds)
- │   
+ ├── 📁 Module_3
+ │   │
+ │   ├── 📓 Notebooks
+ │   │   ├── 📓 Module 3 S01.ipynb
+ │   │   ├── 📓 Module 3 S02.ipynb
+ │   │   ├── 📓 Module 3 S03.ipynb
+ │   │   ├── 📓 Module 3 S04.ipynb
+ │   │   ├── 📓 Module 3 S05.ipynb
+ │   │   ├── 📓 Module 3 S06.ipynb
+ │   │   └── 📓 Module 3 S07.ipynb
+ │   │
+ │   └── 📊 Data
+ │       │
+ │       ├── 🟠 Elemental Features & ML Preparation (S01)
+ │       │   ├── 📊 cleaned_cp_dataset.csv (Input)
+ │       │   ├── 📊 elemental_feature_vectors.csv (Output)
+ │       │   └── 📊 materials_feature_matrix.csv (Output)
+ │       │
+ │       ├── 🟠 CBFV Featurization, Magpie Properties (S03-S04)
+ │       │   ├── 📊 cleaned_cp_dataset.csv (Input)
+ │       │   └── 📊 cbfv_features.xls / cbfv_features.csv (Output — 4,564 rows × 133 cols)
+ │       │
+ │       ├── 🟠 Matminer Featurization, Magpie & Deml (S05)
+ │       │   ├── 📊 cleaned_cp_dataset.csv (Input)
+ │       │   ├── 📊 matminer_magpie_features.csv (Output — 4,564 rows × 133 cols)
+ │       │   └── 📊 matminer_deml_features.csv (Output — 4,564 rows × 81 cols)
+ │       │
+ │       ├── 🟠 RFE + Random Forest Feature Selection (S06)
+ │       │   ├── 📊 filtered_features_s20.csv (Input — 4,564 rows × 96 cols)
+ │       │   ├── 📊 curated_features_s21.csv (Output — 4,564 rows × 21 cols)
+ │       │   └── 📊 rfe_random_forest_importance_s21.csv (Output — top-20 importances)
+ │       │
+ │       └── 🟠 Structural Featurization via Materials Project (S07)
+ │           ├── 📊 perovskites_data.csv (Input — 4,719 rows)
+ │           └── 📊 structural_features_s22.csv (Output — SiteStatsFingerprint + Bag of Bonds)
+ │
+ ├── 📁 Module_4
+ │   │
+ │   ├── 📓 Notebooks
+ │   │   └── 📓 Module 4 S01.ipynb
+ │   │
+ │   └── 📊 Data
+ │       │
+ │       └── 🔴 Linear vs. Ridge Regression for Cp Prediction (S01)
+ │           ├── 📊 cp_data_demo.csv (Input — raw Formula, Temperature, Heat_Capacity)
+ │           └── 🖼️ ridge_alpha_sweep.png (Output — α vs. test R² plot)
  │
  └── 📄 README.md
 ```
@@ -252,7 +262,7 @@ The retrieved datasets are converted into Pandas DataFrames, merged using `Mater
 | `Formula`          | Chemical formula                      |
 | `Bandgap`          | Band gap value (eV)                   |
 | `Formation_Energy` | Formation energy per atom (eV/atom)   |
-| `Volume`           | Material volume (Ų)                   |
+| `Volume`           | Unit-cell volume (Å³)                 |
 </details>
 
 <details>
@@ -260,9 +270,9 @@ The retrieved datasets are converted into Pandas DataFrames, merged using `Mater
 <br>
 
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
-<img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Dataset%20Loading-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Automated%20Data%20Profiling-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-ydata-profiling-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Missing%20Data%20Analysis-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Mean%20Imputation-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-KNN%20Imputation-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Scikit-Learn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Data%20Preprocessing-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
+<img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Dataset%20Loading-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Automated%20Data%20Profiling-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-ydata--profiling-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Missing%20Data%20Analysis-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Mean%20Imputation-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-KNN%20Imputation-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Scikit--Learn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Data%20Preprocessing-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-The notebook loads the `perovskites_data.csv` dataset generated in Session 09 and displays the first records, then creates an automated profiling report saved as `perovskites_report.html`.
+The notebook (Module 2, Session 02) loads the `perovskites_data.csv` dataset generated in Module 2 S01 and displays the first records, then creates an automated profiling report saved as `perovskites_report.html`.
 
 ```text
 Mean Imputation  →  SimpleImputer(strategy="mean")
@@ -288,7 +298,7 @@ Both approaches are applied to the `Bandgap` column.
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
 <img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Duplicate%20Detection-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Boxplot%20Visualization-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Statistical%20Outlier%20Detection-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-IQR%20Method-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Data%20Quality%20Assessment-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-The notebook (Session 11) reloads the cleaned `perovskites_data.csv` dataset and inspects it for data-quality issues.
+The notebook (Module 2, Session 03) reloads the cleaned `perovskites_data.csv` dataset and inspects it for data-quality issues.
 
 It first detects **duplicate entries** based on the `Formula` column using `df.duplicated()`, then visualizes the distribution of the `Bandgap` column with a **Seaborn boxplot** to spot anomalies visually. Finally, it applies the **IQR method** — computing Q1, Q3, and IQR — to mathematically flag statistical outliers in `Bandgap`.
 
@@ -308,9 +318,9 @@ Duplicate Detection (Formula) → Boxplot (Bandgap) → IQR Bounds → Flagged O
 <br>
 
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
-<img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Domain-Driven%20Data%20Cleaning-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Physical%20Plausibility%20Filtering-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Correlation%20Heatmap-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Feature%20Relationships-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
+<img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Domain--Driven%20Data%20Cleaning-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Physical%20Plausibility%20Filtering-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Correlation%20Heatmap-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Feature%20Relationships-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-The notebook (Session 12) reloads `perovskites_data.csv` and applies **domain-driven cleaning**, filtering out physically implausible band gap values (> 20 eV) to produce a cleaned `df_clean`. It then selects numeric columns (`Bandgap`, `Formation_Energy`, `Volume`) and generates a **correlation heatmap** with Seaborn. The finalized dataset is exported as `cleaned_materials_dataset.csv`.
+The notebook (Module 2, Session 04) reloads `perovskites_data.csv` and applies **domain-driven cleaning**, filtering out physically implausible band gap values (> 20 eV) to produce a cleaned `df_clean`. It then selects numeric columns (`Bandgap`, `Formation_Energy`, `Volume`) and generates a **correlation heatmap** with Seaborn. The finalized dataset is exported as `cleaned_materials_dataset.csv`.
 
 ```text
 perovskites_data.csv 
@@ -325,17 +335,17 @@ cleaned_materials_dataset.csv ✅
 <img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Build a cleaned, analysis-ready DataFrame (`df_clean`).
 <img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Generate and interpret a correlation heatmap of materials properties.
 <img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Understand relationships between band gap, formation energy, and volume.
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Export finalized ML-ready dataset to `cleaned_materials_dataset.xls`.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Export the finalized ML-ready dataset to `cleaned_materials_dataset.csv`.
 
-**📊 Dataset Generated:** `cleaned_materials_dataset.xls` (4,719 rows, 5 columns)
+**📊 Dataset Generated:** `cleaned_materials_dataset.csv` (4,719 rows, 5 columns)
 </details>
 
-<details open>
+<details>
 <summary><b>📓 Module 2 S05.ipynb — 🌡️ Heat Capacity (Cp) Dataset Cleaning & Analysis</b></summary>
 <br>
 
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
-<img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Heat%20Capacity%20Data-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Temperature%20Dependent%20Properties-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Column%20Standardization-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Physical%20Constraint%20Filtering-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Distribution%20Analysis-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Q-Q%20Plot%20Normality%20Testing-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Cp%20vs%20Temperature%20Trends-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Material%20Family%20Classification-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
+<img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Heat%20Capacity%20Data-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Temperature%20Dependent%20Properties-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Column%20Standardization-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Physical%20Constraint%20Filtering-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Distribution%20Analysis-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Q--Q%20Plot%20Normality%20Testing-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Cp%20vs%20Temperature%20Trends-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Material%20Family%20Classification-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
 The notebook loads `cp_data_demo.csv` (4,577 rows) containing heat capacity measurements across different materials and temperatures. It standardizes column names to a **canonical schema** (`formula`, `T`, `Cp`), removes rows with missing values, filters physically implausible data (T < 0 or Cp < 0), and exports a cleaned dataset `cleaned_cp_dataset.csv` (4,564 rows).
 
@@ -374,7 +384,7 @@ Visualization and statistical analysis include **distribution histograms**, **Q-
 | `cp_data_demo.csv` | 📥 Input | 4,577 | 86.9 KB | Raw heat capacity dataset (demo) |
 | `cleaned_cp_dataset.csv` | 📤 Output | 4,564 | 95.6 KB | Cleaned, standardized, validated dataset |
 
-**Output Dataset Schema (`cleaned_cp_dataset.xls`):**
+**Output Dataset Schema (`cleaned_cp_dataset.csv`):**
 
 | Column    | Description                           | Units        |
 | --------- | -------------------------------------- | ------------ |
@@ -384,14 +394,14 @@ Visualization and statistical analysis include **distribution histograms**, **Q-
 
 </details>
 
-<details open>
+<details>
 <summary><b>📓 Module 2 S06.ipynb — 📊 Heat Capacity Visualization & Material Family Classification</b></summary>
 <br>
 
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
 <img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Heat%20Capacity%20Visualization-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Temperature%20Dependent%20Trends-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Material%20Classification-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Chemical%20Family%20Analysis-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Data%20Aggregation-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Statistical%20Grouping-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-The notebook (Session 14) loads the `cleaned_cp_dataset.csv` and performs multi-level visualization and classification analysis. It plots temperature-dependent heat capacity trends for selected materials using line plots with markers, then applies a **material family classification function** to categorize compounds into Oxides, Carbides, Nitrides, and Others based on chemical composition.
+The notebook (Module 2, Session 06) loads the `cleaned_cp_dataset.csv` and performs multi-level visualization and classification analysis. It plots temperature-dependent heat capacity trends for selected materials using line plots with markers, then applies a **material family classification function** to categorize compounds into Oxides, Carbides, Nitrides, and Others based on chemical composition.
 
 The classified data is then aggregated by family and temperature, computing mean and standard deviation statistics for comparative analysis across material families.
 
@@ -408,7 +418,7 @@ cleaned_cp_dataset.csv
 ```
 
 **Classification Logic:**
-```python
+```text
 - 'O' in formula (no 'C', no 'N') → Oxide
 - 'C' in formula → Carbide
 - 'N' in formula → Nitride
@@ -433,14 +443,14 @@ cleaned_cp_dataset.csv
 
 </details>
 
-<details open>
+<details>
 <summary><b>📓 Module 2 S07.ipynb — 🎨 Advanced Multi-Family Heat Capacity Analysis with FacetGrid Visualization</b></summary>
 <br>
 
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
-<img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn%20FacetGrid-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Advanced%20Data%20Classification-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Chlorides%20%26%20Halides-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Bromides%20%26%20Fluorides-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Oxides%20%26%20Nitrides-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Sulfides%20%26%20Carbides-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Multi-Panel%20Visualization-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Comparative%20Analysis-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Publication%20Quality%20Plots-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
+<img src="https://img.shields.io/badge/-Pandas-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Seaborn%20FacetGrid-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Advanced%20Data%20Classification-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Chlorides%20%26%20Halides-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Bromides%20%26%20Fluorides-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Oxides%20%26%20Nitrides-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Sulfides%20%26%20Carbides-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Multi--Panel%20Visualization-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Comparative%20Analysis-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Publication%20Quality%20Plots-8A2BE2?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-The notebook (Session 15) performs an **advanced multi-family materials analysis** using the `cleaned_cp_dataset.csv`. It implements an extended classification scheme detecting **7 chemical families** (Chlorides, Bromides, Fluorides, Oxides, Nitrides, Sulfides, Carbides, and Others) based on chemical composition analysis.
+The notebook (Module 2, Session 07) performs an **advanced multi-family materials analysis** using the `cleaned_cp_dataset.csv`. It implements an extended classification scheme detecting **8 chemical families** (Chlorides, Bromides, Fluorides, Oxides, Nitrides, Sulfides, Carbides, and Others) based on chemical composition analysis.
 
 The data is thoroughly cleaned by standardizing column names, removing NaN values, and sorting by family, formula, and temperature. A **Seaborn FacetGrid** is then created to display Cp vs Temperature in a 3-column grid layout, with each subplot showing all materials within a specific chemical family, color-coded by formula for easy comparison.
 
@@ -668,7 +678,7 @@ This notebook (Module 3, Session 02) trains a **`scikit-learn` Linear Regression
 - **Interactive "What-If" Testing:** Predicting properties for recipes that were never physically tested
 - **Model Visualization:** Overlaying predictions on real experimental data to sanity-check the model
 
-This session gives a first hands-on taste of **predictive materials modeling**, previewing the machine-learning workflows that Module 4 will build on with regression, classification, and more advanced models trained on the feature vectors produced elsewhere in Module 3.
+This session gives a first hands-on taste of **predictive materials modeling**, previewing the machine-learning workflows that Module 4 builds on with regression, classification, and more advanced models trained on materials data.
 
 </details>
 
@@ -700,7 +710,7 @@ This notebook (Module 3, Session 03) installs and uses the **CBFV** (Composition
 <img src="https://img.shields.io/badge/-Learning%20Outcome-0d1117?style=flat-square&color=8A2BE2"/>
 <img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Install and apply the CBFV library to generate compositional feature vectors.
 <img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Standardize a dataset's schema (`formula`/`target`) for CBFV compatibility.
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Generate a 133-feature Magpie-based descriptor matrix from 4,564 formulas.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Generate a 133-column Magpie-based descriptor matrix from 4,564 formulas.
 <img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Audit a feature matrix for all-zero and missing (NaN) columns before export.
 
 **Output file inspected:** `cbfv_features.xls` (saved as plain CSV text despite the `.xls` extension) — **4,564 rows × 133 columns**, no missing values, columns following the `avg_*`, `dev_*`, `range_*`, `max_*`, `min_*`, `mode_*` naming convention for each Magpie elemental property, plus a trailing `T` (temperature) column.
@@ -778,9 +788,11 @@ This notebook (Module 3, Session 05) uses **Matminer's `ElementProperty` featuri
 | Magpie | 132 | (4,564, 133) | 536.71 s |
 | Deml   | 80  | (4,564, 81)  | 532.90 s |
 
+> Runtimes are essentially identical — the runtime is dominated by per-row `Composition` handling rather than the number of features — so the main difference between the presets is dimensionality (132 vs. 80 features), not speed.
+
 </details>
 
-<details open>
+<details>
 <summary><b>📓 Module 3 S06.ipynb — 🧮 Feature Selection: RFE (Ridge) + Random Forest Importance</b></summary>
 <br>
 
@@ -834,19 +846,19 @@ This notebook (Module 3, Session 06) takes a wide Magpie-based feature matrix an
 | File | Type | Rows | Columns | Description |
 |------|------|------|---------|--------------|
 | `filtered_features_s20.csv` | 📥 Input | 4,564 | 96 | Wide Magpie-based feature matrix carried in from the prior feature-engineering stage |
-| `curated_features_s21.csv` | 📤 Output | 4,564 | 21 | `formula` (if present) + target (`MagpieData mean GSbandgap`) + top-20 RFE features |
+| `curated_features_s21.csv` | 📤 Output | 4,564 | 21 | Target (`MagpieData mean GSbandgap`) + top-20 RFE features (`formula` also kept if present) |
 | `rfe_random_forest_importance_s21.csv` | 📤 Output | 20 | 2 | Feature name + Random Forest importance score, sorted descending |
 
 </details>
 
-<details open>
+<details>
 <summary><b>📓 Module 3 S07.ipynb — 🏗️ Structural Featurization via Materials Project (SiteStatsFingerprint & Bag of Bonds)</b></summary>
 <br>
 
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
 <img src="https://img.shields.io/badge/-Materials%20Project%20API-FFA726?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-MPRester-FFA726?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Crystal%20Structure%20Retrieval-FFA726?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matminer%20Structure%20Featurizers-FFA726?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-SiteStatsFingerprint-FFA726?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Bag%20of%20Bonds-FFA726?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Structure%20Based%20Descriptors-FFA726?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-CSV%20Export-FFA726?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-This notebook (Module 3, Session 07) moves beyond purely **compositional** descriptors (Modules 3 S01/S03/S05) into **structural** featurization — it pulls actual crystal structures for the perovskite dataset from the Materials Project and derives two matminer structure-based descriptor sets: `SiteStatsFingerprint` and `BagofBonds`.
+This notebook (Module 3, Session 07) moves beyond purely **compositional** descriptors (Module 3 S01/S03/S05) into **structural** featurization — it pulls actual crystal structures for the perovskite dataset from the Materials Project and derives two matminer structure-based descriptor sets: `SiteStatsFingerprint` and `BagofBonds`.
 
 **Workflow:**
 1. Load `perovskites_data.csv` (**4,719 rows**) and validate that a `Material_ID` column exists
@@ -886,6 +898,90 @@ This notebook (Module 3, Session 07) moves beyond purely **compositional** descr
 
 </details>
 
+<br>
+
+<div align="center">
+<img src="https://user-images.githubusercontent.com/74038190/216122065-2f028bae-25d3-4dfd-83e7-090a26e837a7.png" width="60">
+
+# 🔴 Module 4 — Machine Learning for Materials
+
+<img src="https://user-images.githubusercontent.com/74038190/213910845-af37a709-8995-40d6-be59-724526e3c3d7.gif" width="500">
+</div>
+
+<details open>
+<summary><b>📓 Module 4 S01.ipynb — 📈 Linear vs. Ridge Regression for Heat Capacity (Cp) Prediction</b></summary>
+<br>
+
+<img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
+<img src="https://img.shields.io/badge/-Scikit--Learn-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Linear%20Regression-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Ridge%20Regression-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-L2%20Regularization-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Alpha%20Hyperparameter%20Sweep-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Formula%20Featurization-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-GroupShuffleSplit-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-StandardScaler%20Pipeline-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-R%C2%B2%20Model%20Evaluation-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib%20Visualization-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
+
+This notebook (Module 4, Session 01) is the first **supervised machine-learning** session of the course. It predicts **heat capacity (Cp)** from a material's **chemical formula and temperature**, then compares an **unregularized Linear Regression baseline** against **Ridge Regression** across a sweep of regularization strengths (α).
+
+**Workflow:**
+1. Load the raw `cp_data_demo.csv` (`Formula`, `Temperature`, `Heat_Capacity`) and drop rows with a missing value in any of those three columns
+2. **Featurize each formula** with a hand-built parser: a regex converts strings such as `Al2Be1O4` into element counts, which are combined with built-in atomic-mass and electronegativity lookup tables (40 elements) into `n_atoms`, `n_elements`, `mean_mass`, `mean_EN`, and one atomic-fraction column `frac_<element>` per element
+3. Build the model inputs: `X` = composition features + `Temperature`, `y` = `Heat_Capacity`
+4. Split 80/20 with **`GroupShuffleSplit`** (`test_size=0.2`, `random_state=42`), **grouped by `Formula`**, so every row of a given material lands entirely in train *or* test — the model is evaluated on materials it has never seen
+5. Train the baseline: `make_pipeline(StandardScaler(), LinearRegression())`
+6. Sweep **50 α values** from 0.01 to 100 (`np.logspace(-2, 2, 50)`) with `make_pipeline(StandardScaler(), Ridge(alpha=α))`, recording test R² for each
+7. Select the α with the highest test R², then plot the sweep (log-scaled α axis, baseline as a red dashed line, best α as a green dotted line) and save it as `ridge_alpha_sweep.png` at 300 dpi
+
+```text
+📥 cp_data_demo.csv (Formula, Temperature, Heat_Capacity)
+  ↓ (dropna on the 3 required columns)
+  ↓ (Formula → n_atoms, n_elements, mean_mass, mean_EN, frac_<element>)
+  ↓ X = composition features + Temperature   |   y = Heat_Capacity
+  ↓ (GroupShuffleSplit 80/20, groups = Formula, random_state=42)
+  ↓ Baseline: StandardScaler + LinearRegression      → Train R² 0.910 | Test R² 0.924
+  ↓ Ridge α sweep: np.logspace(-2, 2, 50)            → best α = 100.00 | Test R² 0.928
+📤 ridge_alpha_sweep.png ✅
+```
+
+**Engineered Features:**
+
+| Feature | Description |
+|---------|-------------|
+| `n_atoms` | Total number of atoms in the formula unit |
+| `n_elements` | Number of distinct elements |
+| `mean_mass` | Atom-weighted mean atomic mass (g/mol) |
+| `mean_EN` | Atom-weighted mean Pauling electronegativity |
+| `frac_<El>` | Atomic fraction of each element (e.g. `frac_O`, `frac_Al`) |
+| `Temperature` | Measurement temperature (K) — a **feature**, not the target |
+
+**Results:**
+
+| Model | Train R² | Test R² |
+|-------|:--------:|:-------:|
+| Linear Regression (baseline) | 0.910 | 0.924 |
+| Ridge Regression (best α = 100.00) | — | **0.928** |
+
+<div align="center">
+
+<img src="Module_4/Data/ridge_alpha_sweep.png" alt="Ridge Regression: α vs. test R² sweep" width="650"/>
+
+*Test R² rises steadily once α exceeds ~1 and peaks at the upper edge of the sweep (α = 100), clearly above the unregularized baseline.*
+
+</div>
+
+> 💡 **Reading the result:** Ridge improves test R² only slightly (≈ 0.924 → 0.928), so the baseline is already strong. Two things are worth knowing before treating α = 100 as final: **(1)** the best α sits at the *edge* of the searched range and the curve is still rising, so a larger α (e.g. `np.logspace(-2, 4, 50)`) may score higher; **(2)** α is chosen using the *test* set, which makes the 0.928 slightly optimistic — a cross-validated search on the training data (e.g. `GroupKFold` or `RidgeCV`) is the cleaner way to tune it. These are natural follow-ups for the next sessions.
+
+<img src="https://img.shields.io/badge/-Learning%20Outcome-0d1117?style=flat-square&color=8A2BE2"/>
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Turn raw chemical-formula strings into numerical composition features (counts, fractions, weighted mean mass and electronegativity).
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Frame a materials problem as supervised regression: features (`X`) vs. target (`y`).
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Avoid leakage between train and test with a group-aware split (`GroupShuffleSplit`).
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Chain `StandardScaler` and a regressor in a scikit-learn `Pipeline`.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Understand L2 regularization and tune Ridge's α by sweeping it on a log scale.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Evaluate and compare models with R², and visualize the comparison with `matplotlib`.
+
+**📊 Datasets Used & Generated:**
+
+| File | Type | Description |
+|------|------|-------------|
+| `cp_data_demo.csv` | 📥 Input | Raw heat capacity dataset (`Formula`, `Temperature`, `Heat_Capacity`) — original column names, not the standardized `formula`/`T`/`Cp` schema of `cleaned_cp_dataset.csv` |
+| `ridge_alpha_sweep.png` | 📤 Output | Alpha-sweep plot (300 dpi): Ridge test R² vs. α, with the Linear Regression baseline and best α marked |
+
+</details>
+
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
 ## 🛠 Technologies Used
@@ -902,7 +998,7 @@ This notebook (Module 3, Session 07) moves beyond purely **compositional** descr
 | 📒 Jupyter Notebook      | Interactive Coding               |
 | 🌐 Materials Project API | Materials Data Retrieval         |
 | 🔬 MPRester              | Materials Project Python Client  |
-| 🤖 Scikit-Learn          | Data Preprocessing & Feature Selection |
+| 🤖 Scikit-Learn          | Preprocessing, Feature Selection, Regression Models (Linear, Ridge), Pipelines & Evaluation |
 | 🧬 Matminer              | Compositional & Structural Featurization |
 | 📋 ydata-profiling       | Automated Dataset Profiling      |
 | 🌳 Git                   | Version Control                  |
@@ -925,13 +1021,15 @@ This notebook (Module 3, Session 07) moves beyond purely **compositional** descr
 | **2** | **S06** | `cleaned_cp_dataset.csv` | Visualization & Classification | - | - |
 | **2** | **S07** | `cleaned_cp_dataset.csv` | Multi-Family FacetGrid Analysis | - | - |
 | **3** | **S01** | Cleaned Materials Data | Elemental Feature Vectors ✅ | - | - |
+| **3** | **S02** | In-notebook lab data (6 records) | Trained `LinearRegression` model (no file output) ✅ | - | 6 |
 | **3** | **S03** | `cleaned_cp_dataset.csv` | `cbfv_features.xls` / `.csv` ✅ (CBFV, Magpie) | ~3.9 MB | 4,564 × 133 |
 | **3** | **S04** | `cbfv_features.csv` | Feature matrix review (KeyError on 2nd dataset) ⚠️ | - | 4,564 × 133 |
 | **3** | **S05** | `cleaned_cp_dataset.csv` | `matminer_magpie_features.csv` ✅ / `matminer_deml_features.csv` ✅ | - | 4,564 × 133 / 4,564 × 81 |
 | **3** | **S06** | `filtered_features_s20.csv` | `curated_features_s21.csv` ✅ / `rfe_random_forest_importance_s21.csv` ✅ | - | 4,564 × 21 |
 | **3** | **S07** | `perovskites_data.csv` | `structural_features_s22.csv` ✅ (SiteStatsFingerprint + Bag of Bonds) | - | 4,719 × N |
+| **4** | **S01** | `cp_data_demo.csv` | `ridge_alpha_sweep.png` ✅ + Linear/Ridge R² metrics (Test R² 0.924 → 0.928) | - | - |
 
-**Legend:** ✅ = ML-Ready | ⚠️ = Incomplete / Debug Session | 📥 = Input | 📤 = Output | 📊 = Visualization
+**Legend:** ✅ = ML-Ready / Complete | ⚠️ = Incomplete / Debug Session | 📥 = Input | 📤 = Output | 📊 = Visualization
 
 </div>
 
@@ -950,16 +1048,22 @@ This notebook (Module 3, Session 07) moves beyond purely **compositional** descr
 **Module 3 — Feature Engineering & ML Preparation**
 ![](https://progress-bar.dev/100/?title=Complete&width=400&color=FFA726)
 
+**Module 4 — Machine Learning for Materials**
+![](https://progress-bar.dev/15/?title=In%20Progress&width=400&color=FF6B6B)
+
 </div>
 
 ### Module 1
 <img src="https://img.shields.io/badge/-Python%20Programming-0d1117?style=flat-square&color=00C2FF" height="26"/> <img src="https://img.shields.io/badge/-Material%20Property%20Analysis-0d1117?style=flat-square&color=00C2FF" height="26"/> <img src="https://img.shields.io/badge/-Engineering%20Data%20Handling-0d1117?style=flat-square&color=00C2FF" height="26"/> <img src="https://img.shields.io/badge/-Scientific%20Visualization-0d1117?style=flat-square&color=00C2FF" height="26"/> <img src="https://img.shields.io/badge/-Dataset%20Management-0d1117?style=flat-square&color=00C2FF" height="26"/>
 
 ### Module 2
-<img src="https://img.shields.io/badge/-Materials%20Project%20API-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Real%20Materials%20Dataset%20Retrieval-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Perovskite%20Data%20Analysis-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Pandas%20DataFrame%20Operations-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Dataset%20Merging-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-CSV%20Dataset%20Creation-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Automated%20Data%20Profiling-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Missing%20Value%20Handling-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Mean%20Imputation-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-KNN%20Imputation-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Duplicate%20Detection-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Statistical%20%26%20Visual%20Outlier%20Detection%20%28Boxplot%2C%20IQR%29-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Domain-Driven%20Data%20Cleaning-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Correlation%20Analysis%20%26%20Heatmaps-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Heat%20Capacity%20Analysis-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Temperature%20Dependent%20Properties-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Statistical%20Normality%20Testing-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Material%20Classification-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-FacetGrid%20Visualization-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Multi-Panel%20Analysis-0d1117?style=flat-square&color=8A2BE2" height="26"/>
+<img src="https://img.shields.io/badge/-Materials%20Project%20API-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Real%20Materials%20Dataset%20Retrieval-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Perovskite%20Data%20Analysis-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Pandas%20DataFrame%20Operations-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Dataset%20Merging-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-CSV%20Dataset%20Creation-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Automated%20Data%20Profiling-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Missing%20Value%20Handling-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Mean%20Imputation-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-KNN%20Imputation-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Duplicate%20Detection-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Statistical%20%26%20Visual%20Outlier%20Detection%20%28Boxplot%2C%20IQR%29-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Domain--Driven%20Data%20Cleaning-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Correlation%20Analysis%20%26%20Heatmaps-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Heat%20Capacity%20Analysis-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Temperature%20Dependent%20Properties-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Statistical%20Normality%20Testing-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Material%20Classification-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-FacetGrid%20Visualization-0d1117?style=flat-square&color=8A2BE2" height="26"/> <img src="https://img.shields.io/badge/-Multi--Panel%20Analysis-0d1117?style=flat-square&color=8A2BE2" height="26"/>
 
 ### Module 3
-<img src="https://img.shields.io/badge/-Elemental%20Property%20Extraction-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Periodic%20Table%20Mapping-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Chemical%20Formula%20Parsing-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Statistical%20Aggregation-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Elemental%20Feature%20Vectors-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Compositional%20Descriptors-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Feature%20Engineering%20for%20ML-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-ML-ready%20Data%20Preparation-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Scikit--Learn%20Linear%20Regression-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Materials%20Informatics-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Predictive%20Modeling-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Recursive%20Feature%20Elimination-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Random%20Forest%20Feature%20Importance-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Structural%20Featurization-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-SiteStatsFingerprint-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Bag%20of%20Bonds-0d1117?style=flat-square&color=FFA726" height="26"/>
+<img src="https://img.shields.io/badge/-Elemental%20Property%20Extraction-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Periodic%20Table%20Mapping-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Chemical%20Formula%20Parsing-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Statistical%20Aggregation-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Elemental%20Feature%20Vectors-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Compositional%20Descriptors-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Feature%20Engineering%20for%20ML-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-ML--ready%20Data%20Preparation-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Scikit--Learn%20Linear%20Regression-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Materials%20Informatics-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Predictive%20Modeling-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Recursive%20Feature%20Elimination-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Random%20Forest%20Feature%20Importance-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Structural%20Featurization-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-SiteStatsFingerprint-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Bag%20of%20Bonds-0d1117?style=flat-square&color=FFA726" height="26"/>
+
+### Module 4
+<img src="https://img.shields.io/badge/-Heat%20Capacity%20Prediction-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Formula%20to%20Feature%20Conversion-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Group--Aware%20Train%2FTest%20Split-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Scikit--Learn%20Pipelines-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Linear%20Regression%20Baseline-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Ridge%20Regression%20%28L2%29-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Hyperparameter%20Sweep-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-R%C2%B2%20Model%20Evaluation-0d1117?style=flat-square&color=FF6B6B" height="26"/>
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
@@ -972,7 +1076,7 @@ git clone https://github.com/atul9155124/AI-MAT-SCI-MURARI.git
 
 **2️⃣ Enter the Repository**
 ```bash
-cd AI-Material-Science
+cd AI-MAT-SCI-MURARI
 ```
 
 **3️⃣ Install Required Libraries**
@@ -990,21 +1094,31 @@ For Module 3 (Complete Stack — adds feature engineering & structural featuriza
 pip install CBFV matminer pymatgen mp-api python-dotenv scikit-learn
 ```
 
+For Module 4 (Regression modeling — S01 only needs the core scientific stack):
+```bash
+pip install pandas numpy matplotlib scikit-learn
+```
+
 **4️⃣ Organize Data Files**
 
 Place downloaded data files in the correct module directories:
 ```bash
-# Perovskite Materials (S01-S04, and S07 structural featurization)
+# Perovskite Materials (S01-S04, and Module 3 S07 structural featurization)
 Module_2/Data/perovskites_data.csv
 Module_2/Data/cleaned_materials_dataset.csv
 
-# Heat Capacity (S05-S08)
+# Heat Capacity (S05-S07)
 Module_2/Data/cp_data_demo.csv
 Module_2/Data/cleaned_cp_dataset.csv
 
 # Feature Engineering (Module 3)
 Module_3/Data/filtered_features_s20.csv
+
+# Regression Modeling (Module 4 S01 reads the RAW heat capacity file)
+Module_4/Data/cp_data_demo.csv
 ```
+
+> 📌 Module 4 S01 loads `cp_data_demo.csv` with a relative path, so keep it in the same folder you run the notebook from (or update the path in the first cell). The generated `ridge_alpha_sweep.png` is saved to that same folder.
 
 **5️⃣ Configure the Materials Project API Key**
 
@@ -1030,22 +1144,23 @@ Open the notebooks and execute the cells one by one. 🎉
 **📖 Recommended Execution Order:**
 1. Start with Module 1 (S01-S08) for Python fundamentals
 2. Progress to Module 2 S01 (API data retrieval)
-3. Follow S02-S04 for perovskite materials cleaning pipeline
-4. Complete S05 for heat capacity data cleaning
-5. Run S06 for material family visualization
-6. Run S07 for advanced multi-family FacetGrid analysis
+3. Follow Module 2 S02-S04 for the perovskite materials cleaning pipeline
+4. Complete Module 2 S05 for heat capacity data cleaning
+5. Run Module 2 S06 for material family visualization
+6. Run Module 2 S07 for advanced multi-family FacetGrid analysis
 7. Move to Module 3 S01 for elemental property extraction & feature engineering
 8. Run Module 3 S02 to train a Linear Regression model and predict material strength from a new recipe
-9. Run Module 3 S03 to generate a 133-feature CBFV (Magpie) matrix with the CBFV library
+9. Run Module 3 S03 to generate a 133-column CBFV (Magpie) matrix with the CBFV library
 10. Review Module 3 S04 for feature matrix inspection (note: ends in a `KeyError` while testing a second dataset)
 11. Run Module 3 S05 to benchmark Matminer's Magpie vs. Deml compositional featurizers
 12. Run Module 3 S06 to narrow the wide feature matrix down with RFE (Ridge) + Random Forest importance ranking
 13. Run Module 3 S07 to pull crystal structures from the Materials Project and generate structural descriptors (SiteStatsFingerprint & Bag of Bonds)
-14. Use generated feature vectors and materials datasets for downstream ML projects
+14. Run Module 4 S01 to predict heat capacity with Linear vs. Ridge Regression and tune α with a log-scale sweep
+15. Use generated feature vectors and materials datasets for downstream ML projects
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
-## 🔬 Module 2 Complete Workflow
+## 🔬 Complete Workflow (Modules 2–4)
 
 ```mermaid
 flowchart TD
@@ -1074,7 +1189,7 @@ flowchart TD
     V06 --> V06B["Line plots vs Temp<br/>Oxide/Carbide/Nitride<br/>Family Statistics"]
     
     V06B --> V07["📓 Module 2 S07<br/>Advanced FacetGrid"]
-    V07 --> V07B["Multi-panel Visualization<br/>7-Family Classification<br/>Chlorides/Bromides/Fluorides..."]
+    V07 --> V07B["Multi-panel Visualization<br/>8-Family Classification<br/>Chlorides/Bromides/Fluorides..."]
     
     V07B --> MODULE3["<b>📓 MODULE 3 — Feature Engineering</b>"]
     
@@ -1093,7 +1208,12 @@ flowchart TD
     V11B --> V12["📓 Module 3 S07<br/>Structural Featurization"]
     V12 --> V12B["MPRester Structure Retrieval<br/>SiteStatsFingerprint + Bag of Bonds<br/>structural_features_s22.csv"]
     
-    V12B --> ML["🤖 Machine Learning<br/>Feature Engineering<br/>Model Training"]
+    V12B --> MODULE4["<b>📓 MODULE 4 — Machine Learning</b>"]
+    MODULE4 --> V13["📓 Module 4 S01<br/>Linear vs. Ridge Regression"]
+    S --> V13
+    V13 --> V13B["Formula → Composition Features<br/>GroupShuffleSplit + α Sweep<br/>Test R² 0.924 → 0.928"]
+    
+    V13B --> ML["🤖 Machine Learning<br/>Model Training & Evaluation"]
     
     CLEAN1 --> ML
     CLEAN2 --> V08
@@ -1103,9 +1223,11 @@ flowchart TD
     style CLEAN1 fill:#8A2BE2,color:#fff
     style CLEAN2 fill:#8A2BE2,color:#fff
     style MODULE3 fill:#FFA726,color:#fff,font-weight:bold
+    style MODULE4 fill:#FF6B6B,color:#fff,font-weight:bold
     style V08B fill:#FFA726,color:#fff
     style V11B fill:#FFA726,color:#fff
     style V12B fill:#FFA726,color:#fff
+    style V13B fill:#FF6B6B,color:#fff
     style FINAL fill:#00C2FF,color:#fff
     style F fill:#66BB6A,color:#fff
     style S fill:#66BB6A,color:#fff
@@ -1121,12 +1243,12 @@ flowchart TD
 
 | File | Type | Rows | Columns | Size | Purpose |
 |------|------|------|---------|------|---------|
-| `perovskites_data.csv` | CSV | - | Material_ID, Formula, Bandgap, Formation_Energy, Volume | - | Input data from Materials Project API (S01) |
-| `cleaned_materials_dataset.csv` | Data Table | 4,719 | Material_ID, Formula, Bandgap, Formation_Energy, Volume | 291.7 KB | **Output:** Cleaned & processed materials dataset after domain filtering (S01-S04) |
+| `perovskites_data.csv` | CSV | 4,719 | Material_ID, Formula, Bandgap, Formation_Energy, Volume | - | Input data from Materials Project API (S01) |
+| `cleaned_materials_dataset.csv` | CSV | 4,719 | Material_ID, Formula, Bandgap, Formation_Energy, Volume | 291.7 KB | **Output:** Cleaned & processed materials dataset after domain filtering (S01-S04) |
 | `perovskites_report.html` | Report | - | - | - | Automated profiling report with data quality metrics (S02) |
 
 **Data Flow:**
-```
+```text
 Materials Project API → perovskites_data.csv 
   ↓ (S02: Profiling & Imputation)
   ↓ (S03: Duplicate & Outlier Detection)
@@ -1136,7 +1258,7 @@ cleaned_materials_dataset.csv ✅
 
 ---
 
-### 🟣 Module 2 S05-S08: Heat Capacity (Cp) Data & Elemental Features
+### 🟣 Module 2 S05-S07: Heat Capacity (Cp) Data
 
 | File | Type | Rows | Columns | Size | Purpose |
 |------|------|------|---------|------|---------|
@@ -1144,14 +1266,14 @@ cleaned_materials_dataset.csv ✅
 | `cleaned_cp_dataset.csv` | **Output** | 4,564 | formula, T, Cp | 95.6 KB | **Output:** Cleaned, standardized, and validated heat capacity dataset (S05) |
 
 **Data Flow:**
-```
+```text
 cp_data_demo.csv (Raw)
   ↓ (MODULE 2, S05: Standardize Schema, Filter, Validate)
 cleaned_cp_dataset.csv ✅
   ↓ (S06: Visualization & Family Classification)
   ↓       └─ Oxide/Carbide/Nitride/Other classification
   ↓ (S07: Advanced Multi-Family Analysis)
-  ↓       └─ 7-Family Classification with FacetGrid
+  ↓       └─ 8-Family Classification with FacetGrid
   ↓ (MODULE 3, S01: Elemental Property Extraction)
   ↓       └─ Periodic table mapping, formula parsing, aggregation
 Elemental Feature Vectors & ML-Ready Descriptors ✅
@@ -1168,35 +1290,41 @@ Elemental Feature Vectors & ML-Ready Descriptors ✅
 - ✅ S07: 8-Family Classification (Chlorides, Bromides, Fluorides, Oxides, Nitrides, Sulfides, Carbides, Others)
 - ✅ FacetGrid multi-panel visualization with hue-based color coding
 
-**Feature Engineering (S01):**
+**Feature Engineering (Module 3 S01):**
 - ✅ Periodic table property mapping (electronegativity, atomic mass, etc.)
 - ✅ Chemical formula parsing and element extraction
 - ✅ Statistical aggregation of elemental properties (mean, max, min, sum)
 - ✅ Elemental feature vector generation for ML pipelines
 
-**Compositional Featurization (S03-S05):**
-- ✅ S03: CBFV library with Magpie properties (133 features)
-- ✅ S04: Feature selection & normalization (ML-ready preparation)
+**Compositional Featurization (Module 3 S03-S05):**
+- ✅ S03: CBFV library with Magpie properties (133 columns)
+- ⚠️ S04: CBFV matrix re-inspection; second-dataset featurization ends in an unresolved `KeyError`
 - ✅ S05: Matminer Magpie (132 features) & Deml (80 features) featurization
-- ✅ Benchmark comparison: Magpie 536.71s vs Deml 532.90s
+- ✅ Benchmark comparison: Magpie 536.71 s vs. Deml 532.90 s (near-identical runtime)
 - ✅ Multiple descriptor sets ready for model selection
 
-**Feature Selection & Structural Featurization (S06-S07):**
+**Feature Selection & Structural Featurization (Module 3 S06-S07):**
 - ✅ S06: RFE (Ridge) narrows a 96-column feature matrix to the top 20 predictors of `MagpieData mean GSbandgap`
 - ✅ S06: Random Forest importance ranking on the RFE-selected subset, exported alongside the curated feature set
 - ✅ S07: Real crystal structures retrieved for all 4,719 perovskite `Material_ID`s via `MPRester`
 - ✅ S07: `SiteStatsFingerprint` (coordination-number statistics) + `BagofBonds` (bond-length descriptors) structural feature sets
+
+**Regression Modeling (Module 4 S01):**
+- ✅ Raw `cp_data_demo.csv` featurized directly from formula strings (regex parser + mass/electronegativity lookup tables)
+- ✅ Group-aware 80/20 split by `Formula` — no material appears in both train and test
+- ✅ Linear Regression baseline: Train R² 0.910, Test R² 0.924
+- ✅ Ridge α sweep (0.01 → 100, 50 log-spaced values): best α = 100.00, Test R² 0.928
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
 ## 📊 Data Files Inventory
 
 ### Overview
-All datasets are **ML-ready**, fully cleaned, validated, and organized by module for seamless machine-learning pipelines.
+Datasets are cleaned, validated, and organized by module for seamless machine-learning pipelines.
 
 ### Module 2 S01-S04: Perovskite Materials Dataset
 
-```
+```text
 📁 Module_2/Data/Perovskites/
 │
 ├── 📊 perovskites_data.csv
@@ -1210,7 +1338,7 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 │   Columns: Material_ID, Formula, Bandgap, Formation_Energy, Volume
 │   Quality Checks: 
 │     ✓ No missing values
-│     ✓ Outliers removed (IQR method)
+│     ✓ Outliers flagged (IQR method, S03)
 │     ✓ Physical plausibility verified (Bandgap ≤ 20 eV)
 │     ✓ Correlation analyzed
 │
@@ -1221,14 +1349,14 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 
 ### Module 2 S05-S07: Heat Capacity Dataset
 
-```
+```text
 📁 Module_2/Data/HeatCapacity/
 │
 ├── 📊 cp_data_demo.csv [INPUT]
 │   Size: 86.9 KB | Rows: 4,577 | Columns: 3
 │   Source: Heat capacity demo dataset
 │   Original Columns: Formula, Temperature, Heat_Capacity
-│   Purpose: Raw input for S05-S07 pipeline
+│   Purpose: Raw input for Module 2 S05-S07 (and Module 4 S01)
 │
 └── 📊 cleaned_cp_dataset.csv ✅ [ML-READY]
     Size: 95.6 KB | Rows: 4,564 | Columns: 3
@@ -1245,7 +1373,7 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 
 ### Module 3 S01: Elemental Features & Feature Engineering
 
-```
+```text
 📁 Module_3/Data/ElementalFeatures/
 │
 ├── 📊 elemental_feature_vectors.csv [ML-READY] ✅
@@ -1261,12 +1389,11 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
     Output from: Feature merging & matrix generation (S01)
     Columns: Material_ID, Formula, [Elemental Features], Bandgap, Formation_Energy, Volume, Temperature, Cp
     Purpose: Complete feature matrix ready for ML model training, regression, classification
-    Quality: All features normalized and validated for supervised learning
 ```
 
 ### Module 3 S02: AI-Powered Strength Prediction (Linear Regression)
 
-```
+```text
 📁 Module_3/ (in-notebook demo — no file output)
 │
 └── 🧠 ai_model [LinearRegression, sklearn] ✅
@@ -1279,14 +1406,14 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 
 ### Module 3 S03: CBFV Featurization (Composition-Based Feature Vectors)
 
-```
+```text
 📁 Module_3/Data/CBFV/
 │
-├── 📊 cbfv_features.xls / cbfv_features.csv [ML-READY] ✅
+└── 📊 cbfv_features.xls / cbfv_features.csv [ML-READY] ✅
     Input: cleaned_cp_dataset.csv (4,564 records)
     Method: CBFV library with Magpie elemental properties
     Output from: Formula → Composition objects → Feature extraction (statistical aggregation)
-    Columns: 133 features (avg_*, dev_*, range_*, max_*, min_*, mode_* for periodic table properties)
+    Columns: 133 columns (avg_*, dev_*, range_*, max_*, min_*, mode_* for periodic table properties)
               + Temperature column (T)
     Features Include:
       ✓ avg_Number, avg_AtomicWeight, avg_Electronegativity (averages)
@@ -1301,23 +1428,22 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
     Quality: ✅ Validated, no zero/missing features, ML-ready
 ```
 
-### Module 3 S04: Feature Analysis & ML Preparation
+### Module 3 S04: CBFV Matrix Inspection & Troubleshooting
 
-```
-📁 Module_3/Data/FeatureAnalysis/
+```text
+📁 Module_3/ (review session — no new data file produced)
 │
-├── 📊 cbfv_normalized.csv [ML-READY] ✅
-    Input: cbfv_features.csv
-    Method: Feature selection, standardization, normalization
-    Output from: Statistical analysis → Feature ranking → StandardScaler / MinMaxScaler (S04)
-    Columns: Retained features after analysis (subset of 133)
-    Purpose: Prepared feature set optimized for ML model training
-    Quality: ✅ Scaled, validated, dimensionality-ready
+└── 🔍 Re-inspection of cbfv_features.csv  ⚠️ [DEBUG SESSION]
+    Input: cbfv_features.csv (from S03) — shape confirmed (4564, 133)
+    Attempt: Run CBFV on a second dataset after renaming composition → formula, band_gap → target
+    Result: ❌ KeyError: 'formula' — source columns did not match the expected schema
+    Purpose: Reference for diagnosing CBFV schema mismatches
+    Status: Unresolved; no featurized output for the second dataset
 ```
 
 ### Module 3 S05: Matminer Featurization (Magpie & Deml Comparison)
 
-```
+```text
 📁 Module_3/Data/MatminerFeatures/
 │
 ├── 📊 matminer_magpie_features.csv [ML-READY] ✅
@@ -1325,10 +1451,10 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 │   Method: Pymatgen Composition + Matminer ElementProperty (magpie preset)
 │   Output from: Formula → Composition → Magpie feature extraction (S05)
 │   Features: 132 compositional descriptors (statistical aggregations of Magpie properties)
-│            + Composition identifier
+│            + formula identifier column
 │   Columns: minimum/maximum/range/mean/avg_dev/mode for: Number, MendeleevNumber, 
 │            AtomicWeight, MeltingT, Column, Row, CovalentRadius, Electronegativity,
-│            NsValence, NpValence, NdValence, NfValence, NValence, NSUnfilled,
+│            NsValence, NpValence, NdValence, NfValence, NValence, NsUnfilled,
 │            NpUnfilled, NdUnfilled, NfUnfilled, NUnfilled, GSvolume_pa,
 │            GSbandgap, GSmagmom, SpaceGroupNumber
 │   Rows: 4,564 | Columns: 133
@@ -1340,31 +1466,28 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
     Input: cleaned_cp_dataset.csv (4,564 records)
     Method: Pymatgen Composition + Matminer ElementProperty (deml preset)
     Output from: Formula → Composition → Deml feature extraction (S05)
-    Features: 80 DEML (Density-weighted ElementMigrationLikelihood) descriptors
-             (more compact than Magpie, focuses on element mobility)
-    Columns: minimum/maximum/range/mean/std_dev for: atom_number, atom_mass, 
-             mus_fere, FERE correction, [other deml-specific properties]
+    Features: 80 compositional descriptors from the Deml elemental-property set
+             (a more compact alternative to Magpie)
+    Columns: minimum/maximum/range/mean/std_dev for each Deml elemental property
+             (e.g. atom_number, atom_mass, mus_fere, FERE correction, ...)
     Rows: 4,564 | Columns: 81
     Benchmark Time: 532.90 seconds
-    Purpose: Alternative compositional features; lightweight option for ML
-    Quality: ✅ Compact representation, fast computation, ML-ready
-    
+    Purpose: Alternative compositional features with lower dimensionality
+    Quality: ✅ Compact representation, ML-ready
+
     === Featurization Comparison (S05) ===
     Magpie (132 features):
       ✓ Comprehensive periodic table properties
-      ✓ Better for complex material relationships
       ✓ Time: 536.71s
     
     Deml (80 features):
-      ✓ Element migration likelihood focus
-      ✓ Reduced dimensionality (lighter computation)
-      ✓ Time: 532.90s
-      ✓ Recommended for fast iteration / feature selection
+      ✓ Reduced dimensionality (fewer columns to model on)
+      ✓ Time: 532.90s (runtime is essentially the same as Magpie)
 ```
 
 ### Module 3 S06: Feature Selection (RFE + Random Forest Importance)
 
-```
+```text
 📁 Module_3/Data/FeatureSelection/
 │
 ├── 📊 curated_features_s21.csv [ML-READY] ✅
@@ -1372,7 +1495,7 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 │   Method: RFE(estimator=Ridge(alpha=1.0), n_features_to_select=20) → RandomForestRegressor importance ranking
 │   Output from: Target-leakage removal → numeric cleaning/imputation → RFE → Random Forest fit (S06)
 │   Target: MagpieData mean GSbandgap
-│   Columns: formula (if present) + target + top-20 RFE-selected Magpie features
+│   Columns: target + top-20 RFE-selected Magpie features (formula also kept if present)
 │   Rows: 4,564 | Columns: 21
 │   Top Features: MagpieData mean Row, MagpieData maximum Electronegativity,
 │                  MagpieData mean NpUnfilled, MagpieData avg_dev NpUnfilled,
@@ -1391,7 +1514,7 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 
 ### Module 3 S07: Structural Featurization (Materials Project Structures)
 
-```
+```text
 📁 Module_3/Data/StructuralFeatures/
 │
 └── 📊 structural_features_s22.csv [ML-READY] ✅
@@ -1407,13 +1530,38 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
     ⚠️ Security: Notebook hardcodes an MPRester API key — replace with an environment variable (.env) before reuse or sharing
 ```
 
+### Module 4 S01: Linear vs. Ridge Regression (Heat Capacity Prediction)
+
+```text
+📁 Module_4/Data/Regression/
+│
+├── 📊 cp_data_demo.csv [INPUT]
+│   Source: Raw heat capacity demo dataset (same file used in Module 2 S05)
+│   Columns: Formula, Temperature, Heat_Capacity
+│   Cleaning in-notebook: dropna on the three columns (no schema renaming)
+│   Purpose: Supervised-learning data — Temperature + formula-derived features → Heat_Capacity
+│
+└── 🖼️ ridge_alpha_sweep.png [OUTPUT] ✅
+    Output from: 50-point log-spaced α sweep (0.01 → 100) of StandardScaler + Ridge, plt.savefig(dpi=300)
+    Contents: Ridge test R² vs. α (log x-axis)
+              + red dashed line = unregularized Linear Regression baseline (Test R² 0.924)
+              + green dotted line = best α (100.00, Test R² 0.928)
+    Model Setup:
+      ✓ Features: n_atoms, n_elements, mean_mass, mean_EN, frac_<element>, Temperature
+      ✓ Target: Heat_Capacity (J/mol·K)
+      ✓ Split: GroupShuffleSplit(test_size=0.2, random_state=42), groups = Formula
+      ✓ Models: make_pipeline(StandardScaler(), LinearRegression()) vs. make_pipeline(StandardScaler(), Ridge(alpha=α))
+    Quality: ✅ Group-aware evaluation on unseen materials
+             ⚠️ Best α lies at the upper edge of the sweep and is selected on the test set — extend the α range and tune with cross-validation before reporting the final score
+```
+
 ---
 
 ## 🌟 Skills You'll Gain
 
 <div align="center">
 
-`Python Programming` `Pandas Data Analysis` `NumPy Scientific Computing` `Material Science Data Handling` `Materials Project API` `API-Based Data Retrieval` `Perovskite Dataset Creation` `Scientific Visualization` `Dataset Profiling` `Missing Data Handling` `Mean Imputation` `KNN Imputation` `Duplicate & Outlier Detection` `IQR Statistical Analysis` `Domain-Driven Data Cleaning` `Correlation Heatmap Analysis` `Heat Capacity Analysis` `Temperature-Dependent Properties` `Statistical Normality Testing` `Q-Q Plot Analysis` `Material Family Classification` `Line Plot Visualization` `FacetGrid Multi-Panel Plots` `Seaborn Hue-Based Coloring` `Publication-Quality Graphics` `Multi-Family Comparative Analysis` `Elemental Property Extraction` `Periodic Table Mapping` `Chemical Formula Parsing` `Statistical Aggregation` `Compositional Descriptors` `Feature Vector Generation` `Machine Learning Data Preparation` `Scikit-Learn Linear Regression` `Materials Informatics` `Predictive Strength Modeling` `Recursive Feature Elimination (RFE)` `Random Forest Feature Importance` `Structural Featurization` `Crystal Structure Retrieval` `SiteStatsFingerprint` `Bag of Bonds Featurization` `Git & GitHub Workflow` `Jupyter Notebook Usage`
+`Python Programming` `Pandas Data Analysis` `NumPy Scientific Computing` `Material Science Data Handling` `Materials Project API` `API-Based Data Retrieval` `Perovskite Dataset Creation` `Scientific Visualization` `Dataset Profiling` `Missing Data Handling` `Mean Imputation` `KNN Imputation` `Duplicate & Outlier Detection` `IQR Statistical Analysis` `Domain-Driven Data Cleaning` `Correlation Heatmap Analysis` `Heat Capacity Analysis` `Temperature-Dependent Properties` `Statistical Normality Testing` `Q-Q Plot Analysis` `Material Family Classification` `Line Plot Visualization` `FacetGrid Multi-Panel Plots` `Seaborn Hue-Based Coloring` `Publication-Quality Graphics` `Multi-Family Comparative Analysis` `Elemental Property Extraction` `Periodic Table Mapping` `Chemical Formula Parsing` `Statistical Aggregation` `Compositional Descriptors` `Feature Vector Generation` `Machine Learning Data Preparation` `Scikit-Learn Linear Regression` `Materials Informatics` `Predictive Strength Modeling` `Recursive Feature Elimination (RFE)` `Random Forest Feature Importance` `Structural Featurization` `Crystal Structure Retrieval` `SiteStatsFingerprint` `Bag of Bonds Featurization` `Ridge Regression (L2 Regularization)` `Hyperparameter Sweeps` `Group-Aware Train/Test Splitting` `Scikit-Learn Pipelines` `Model Evaluation with R²` `Heat Capacity Prediction` `Git & GitHub Workflow` `Jupyter Notebook Usage`
 
 </div>
 
@@ -1441,10 +1589,11 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 | Module 3 S01 | Elemental Property Extraction & Feature Engineering | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
 | Module 3 S02 | AI-Powered Strength Prediction (Linear Regression) | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
 | Module 3 S03 | CBFV Featurization (Magpie Properties) | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
-| Module 3 S04 | Feature Analysis & ML Preparation | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
+| Module 3 S04 | CBFV Matrix Inspection & Troubleshooting | <img src="https://img.shields.io/badge/DEBUG-FFA726?style=flat-square&labelColor=0d1117"/> |
 | Module 3 S05 | Matminer Featurization (Magpie & Deml) | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
 | Module 3 S06 | Feature Selection (RFE + Random Forest Importance) | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
 | Module 3 S07 | Structural Featurization (SiteStatsFingerprint & Bag of Bonds) | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
+| Module 4 S01 | Linear vs. Ridge Regression for Heat Capacity Prediction | <img src="https://img.shields.io/badge/DONE-FF6B6B?style=flat-square&labelColor=0d1117"/> |
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
@@ -1458,7 +1607,7 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 - S01: Elemental Property Extraction ✅
 - S02: AI-Powered Strength Prediction (Linear Regression) ✅
 - S03: CBFV Featurization (Magpie Properties) ✅
-- S04: Feature Analysis & ML Preparation ✅
+- S04: CBFV Matrix Inspection & Troubleshooting ⚠️
 - S05: Matminer Featurization (Magpie & Deml) ✅
 - S06: Feature Selection (RFE + Random Forest) ✅
 - S07: Structural Featurization (Materials Project) ✅
@@ -1466,12 +1615,12 @@ All datasets are **ML-ready**, fully cleaned, validated, and organized by module
 </td>
 <td valign="top">
 
-**Module 4 (Planned)**
-- Machine Learning for Materials
-- Regression Models (Property Prediction)
-- Classification Models
-- Random Forest & XGBoost
-- Neural Networks for Composition-Property Mapping
+**Module 4 (In Progress)**
+- S01: Linear vs. Ridge Regression for Cp Prediction ✅
+- Cross-Validated Hyperparameter Tuning *(planned)*
+- Classification Models *(planned)*
+- Random Forest & XGBoost *(planned)*
+- Neural Networks for Composition-Property Mapping *(planned)*
 
 </td>
 <td valign="top">
@@ -1504,7 +1653,7 @@ flowchart LR
     I --> J[⚛️ Elemental Features<br/>Module 3]
     J --> K[🔗 Feature Engineering<br/>& Selection]
     K --> N[🏗️ Structural Featurization]
-    N --> L[🤖 Machine Learning<br/>Module 4]
+    N --> L[🤖 Machine Learning<br/>Module 4 — S01 ✅]
     L --> M[🚀 AI-Driven<br/>Materials Discovery]
 
     style A fill:#00C2FF,color:#fff
