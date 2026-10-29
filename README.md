@@ -377,7 +377,7 @@ API_KEY = os.getenv("MP_API_KEY")
  │       └── 🔴 SVR (RBF Kernel) Baseline for Cp Prediction (S06)
  │           └── 📊 cp_data_demo.csv (Input — same raw file as S01; no file output)
  │
- ├── 📁 Project_Crystal_System_Prediction
+ ├── 📁 AI MAT SCI PROJECT
  │   │
  │   ├── 📓 Notebooks
  │   │   ├── 📓 dataacquisition.ipynb
