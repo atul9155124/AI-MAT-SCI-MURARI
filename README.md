@@ -386,7 +386,7 @@ API_KEY = os.getenv("MP_API_KEY")
  │   │   ├── 📓 variationfilter_and_corination.ipynb
  │   │   └── 📓 bestmodelfind.ipynb
  │   │
- │   ├── 📊 Data
+ │   ├── 📊 Project Datasets
  │   │   ├── 📊 raw_backup_materials_full_structure_data.csv
  │   │   ├── 📊 materials_cleaned.csv
  │   │   ├── 📊 materials_with_magpie_features.csv
