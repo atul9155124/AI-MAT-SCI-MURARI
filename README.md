@@ -24,17 +24,258 @@
 <br/><br/>
 
 <img src="https://img.shields.io/static/v1?label=MODULES&message=4&color=00C2FF&style=for-the-badge&labelColor=0d1117"/>
-<img src="https://img.shields.io/static/v1?label=NOTEBOOKS&message=24&color=8A2BE2&style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/static/v1?label=NOTEBOOKS&message=28&color=8A2BE2&style=for-the-badge&labelColor=0d1117"/>
 <img src="https://img.shields.io/static/v1?label=STATUS&message=ACTIVE&color=00C2FF&style=for-the-badge&labelColor=0d1117"/>
 <img src="https://img.shields.io/static/v1?label=UPDATED&message=2026&color=8A2BE2&style=for-the-badge&labelColor=0d1117"/>
 
 <br/>
 
-> 📚 Practical AI & Material Science notebooks for learning Python programming, data analysis, material properties, scientific visualization, Materials Project API, machine-learning-ready data processing, and regression modeling.
+> 📚 Practical AI & Material Science notebooks for learning Python programming, data analysis, material properties, scientific visualization, Materials Project API, machine-learning-ready data processing, and regression modeling — plus a **featured project that predicts a material's crystal system directly from its chemical formula** (see below).
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="500">
 
 </div>
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
+
+<div align="center">
+
+# 🔷 Featured Project
+
+## Prediction of Crystal System Directly from Chemical Formula
+
+<img src="https://img.shields.io/static/v1?label=TASK&message=7-Class%20Classification&color=00C2FF&style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/static/v1?label=DATASET&message=10%2C000%20Materials&color=8A2BE2&style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/static/v1?label=BEST%20MODEL&message=Logistic%20Regression&color=FFA726&style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/static/v1?label=TEST%20ACCURACY&message=57.08%25&color=FF6B6B&style=for-the-badge&labelColor=0d1117"/>
+
+</div>
+
+> 🎯 **Goal:** Given only a material's **chemical formula** (e.g. `CaMg(CO3)2`), predict which of the **7 crystal systems** it belongs to — Triclinic, Monoclinic, Orthorhombic, Tetragonal, Trigonal, Hexagonal or Cubic — *without* running DFT or knowing the atomic structure in advance.
+
+<details open>
+<summary><b>📖 Project Overview</b></summary>
+<br>
+
+A material's crystal system controls many of its physical properties, but it is normally only known after the material is synthesized and characterized (or after an expensive structure-prediction calculation). This project asks a simple question: **how much of the crystal system can be learned from the formula alone?**
+
+The project covers the full machine-learning life-cycle:
+
+1. 🌐 **Acquire** 10,000 materials (ID, formula, crystal system, space group, full structure) from the **Materials Project API**
+2. 🧹 **Clean & validate** the data and produce a formal quality report
+3. ⚛️ **Featurize** formulas into numbers (Matminer **Magpie** descriptors) and reduce them with variance and correlation filters
+4. 🤖 **Compare models** with stratified cross-validation (Dummy baseline, Logistic Regression, Linear SVM, Naive Bayes)
+5. 💾 **Save** the best model and use it to predict the crystal system of new formulas
+
+</details>
+
+<details open>
+<summary><b>🔄 Project Pipeline</b></summary>
+<br>
+
+```mermaid
+flowchart TD
+    A["🌐 Materials Project API<br/>10,000 materials"] --> B["📓 dataacquisition.ipynb"]
+    B --> C["📊 materials_full_structure_data.csv<br/>5 columns"]
+    C --> D["📓 datacleaning.ipynb"]
+    D --> E["✅ materials_cleaned.csv<br/>10,000 rows · 0 removed · QC PASSED"]
+
+    E --> F["📓 chemicalformulatonummatrix.ipynb<br/>Formula → pymatgen Composition → Magpie"]
+    F --> G["132 numerical features"]
+    G --> H["📓 variationfilter_and_corination.ipynb<br/>Variance filter + Correlation filter"]
+    H --> I["📊 matminer_magpie_features.csv<br/>102 features<br/>phase3_ml_dataset.csv (+ target)"]
+
+    E --> J["📓 bestmodelfind.ipynb<br/>Dedup → 7,301 formula/crystal-system pairs"]
+    J --> K["Char n-gram TF-IDF on formula text"]
+    K --> L["Stratified 5-fold CV<br/>4 models compared"]
+    L --> M["🏆 Logistic Regression"]
+    M --> N["💾 best_crystal_system_model.joblib"]
+    M --> O["📄 crystal_system_predictions.csv"]
+
+    style A fill:#00C2FF,color:#fff
+    style E fill:#8A2BE2,color:#fff
+    style I fill:#FFA726,color:#fff
+    style N fill:#FF6B6B,color:#fff
+```
+
+</details>
+
+<details>
+<summary><b>📓 Project Notebooks</b></summary>
+<br>
+
+| # | Notebook | Purpose | Key Result |
+|:-:|----------|---------|------------|
+| 1 | `dataacquisition.ipynb` | Query the Materials Project summary endpoint (`MPRester`) for `material_id`, `formula_pretty`, `symmetry`, `structure`; serialize each structure to JSON | 10,000 materials retrieved → `materials_full_structure_data.csv` |
+| 2 | `datacleaning.ipynb` | Standardize column names, auto-detect key columns, check missing values, exact/ID duplicates, formula validity (`pymatgen.Composition`) and empty structures; write the formal report | 10,000 → 10,000 rows (0 removed), status **PASSED** → `materials_cleaned.csv` |
+| 3 | `chemicalformulatonummatrix.ipynb` | Convert formulas to `Composition` objects and generate Matminer `ElementProperty` (Magpie) features | 132 numerical features, 0 NaN, 0 infinite values |
+| 4 | `variationfilter_and_corination.ipynb` | Median-impute, `VarianceThreshold(0.01)`, then drop features with pairwise correlation > 0.95 | 132 → 128 → **102** features → `matminer_magpie_features.csv`, `phase3_ml_dataset.csv` |
+| 5 | `bestmodelfind.ipynb` | Clean formula/target pairs, stratified split, 5-fold CV comparison of 4 models, learning curve, confusion matrix, save model & predictions | Best model: **Logistic Regression** → `best_crystal_system_model.joblib` |
+
+</details>
+
+<details>
+<summary><b>🗂️ Project Datasets & Outputs</b></summary>
+<br>
+
+| File | Type | Shape | Description |
+|------|------|-------|-------------|
+| `raw_backup_materials_full_structure_data.csv` | 📥 Raw backup | 10,000 × 5 | `material_id`, `chemical_formula`, `crystal_system`, `space_group`, `full_structure` (JSON) |
+| `materials_cleaned.csv` | ✅ Cleaned | 10,000 × 5 | Validated dataset used by every later notebook |
+| `formal_data_cleaning_report.txt` | 📄 Report | — | Missing values, duplicates, formula validation, structure checks — **Status: PASSED** |
+| `materials_with_magpie_features.csv` | 📤 Features | 10,000 × 133 | Formula + 132 Magpie features (before filtering) |
+| `matminer_magpie_features.csv` | 📤 Features | 10,000 × 102 | Filtered feature matrix **X** (after variance + correlation filters) |
+| `crystal_system_target.csv` | 🎯 Target | 10,000 × 1 | Crystal-system label **y** |
+| `phase3_ml_dataset.csv` | 📤 ML-ready | 10,000 × 103 | 102 features + `crystal_system` target in one file |
+| `crystal_system_predictions.csv` | 📊 Results | 1,461 × 3 | Test-set formula, actual and predicted crystal system |
+| `best_crystal_system_model.joblib` | 🧠 Model | — | Trained scikit-learn `Pipeline` (TF-IDF + Logistic Regression) |
+
+> 📌 The uploaded copies of these tables carry an `.xls` extension, but their content is plain **CSV** — read them with `pd.read_csv(...)`. The notebooks reference them with `.csv` names.
+
+**Target class distribution (cleaned data, 10,000 materials):**
+
+| Crystal System | Count | Share |
+|----------------|------:|------:|
+| Triclinic | 4,230 | 42.3% |
+| Monoclinic | 2,601 | 26.0% |
+| Trigonal | 1,027 | 10.3% |
+| Orthorhombic | 911 | 9.1% |
+| Cubic | 620 | 6.2% |
+| Tetragonal | 540 | 5.4% |
+| Hexagonal | 71 | 0.7% |
+
+</details>
+
+<details>
+<summary><b>⚙️ Methodology</b></summary>
+<br>
+
+**Data preparation (`bestmodelfind.ipynb`)**
+- Keep only `chemical_formula` (input) and `crystal_system` (target); strip whitespace and drop empty values
+- Remove duplicate *(formula, crystal system)* pairs → **7,301 unique records**
+- `train_test_split(test_size=0.20, stratify=y, random_state=42)` → **5,840 train / 1,461 test**
+
+**Feature representation for the final model**
+- The formula string is converted directly into numbers with a character-level **TF-IDF** vectorizer: `TfidfVectorizer(analyzer="char", ngram_range=(1, 3), lowercase=False, min_df=2, sublinear_tf=True)`
+- Case is preserved so that element symbols such as `Co` (cobalt) and `CO` (carbon monoxide) stay distinguishable
+
+**Model comparison** — `StratifiedKFold(n_splits=5, shuffle=True, random_state=42)` on the training set, scored with accuracy and macro precision / recall / F1:
+
+| Model | CV Accuracy | CV Macro F1 |
+|-------|:-----------:|:-----------:|
+| **Logistic Regression** (`class_weight="balanced"`, `max_iter=1500`) | 54.32% | **43.78%** |
+| Linear SVM (`class_weight="balanced"`) | 56.03% | 42.68% |
+| Multinomial Naive Bayes (`alpha=0.5`) | 55.14% | 36.60% |
+| Dummy Baseline (most frequent class) | 41.68% | 8.41% |
+
+The best model is chosen by **macro F1** (not accuracy) because the classes are heavily imbalanced and every crystal system matters equally.
+
+**Parallel route — composition-physics features (notebooks 3 & 4)**
+- 132 Magpie statistics (min / max / range / mean / avg-dev / mode of properties such as atomic number, electronegativity, covalent radius, valence-electron counts and melting temperature)
+- Variance filter (132 → 128) and correlation filter at 0.95 (128 → 102)
+- The resulting `phase3_ml_dataset.csv` is ready for tree-based or other models (see *Future Work*)
+
+</details>
+
+<details open>
+<summary><b>📈 Results (held-out test set — 1,461 materials)</b></summary>
+<br>
+
+| Metric | Score |
+|--------|:-----:|
+| Accuracy | **57.08%** |
+| Macro Precision | 46.27% |
+| Macro Recall | 53.14% |
+| Macro F1 | 47.92% |
+| *Majority-class baseline accuracy* | *41.68%* |
+
+**Per-class performance:**
+
+| Crystal System | Precision | Recall | F1 | Support |
+|----------------|:---------:|:------:|:--:|:-------:|
+| Cubic | 0.70 | 0.85 | **0.77** | 119 |
+| Triclinic | 0.92 | 0.63 | **0.75** | 609 |
+| Monoclinic | 0.54 | 0.51 | 0.52 | 347 |
+| Trigonal | 0.40 | 0.62 | 0.48 | 139 |
+| Tetragonal | 0.25 | 0.47 | 0.32 | 86 |
+| Orthorhombic | 0.26 | 0.29 | 0.27 | 147 |
+| Hexagonal | 0.18 | 0.36 | 0.24 | 14 |
+
+**What the results say**
+- ✅ The model beats the majority-class baseline by about **15 percentage points** of accuracy, so the formula does carry real signal about the crystal system
+- ✅ **Cubic** and **Triclinic** are the best-recognized systems (F1 ≈ 0.75–0.77)
+- ⚠️ **Hexagonal**, **Orthorhombic** and **Tetragonal** are hard — Hexagonal has only 71 examples in the full dataset (0.7%) and just 14 in the test set, so its score is noisy
+- ⚠️ This is a **proof-of-concept baseline**, not a production-grade predictor
+
+</details>
+
+<details>
+<summary><b>🔮 Use the Trained Model</b></summary>
+<br>
+
+```python
+import joblib
+
+model = joblib.load("best_crystal_system_model.joblib")
+
+formulas = ["CaMg(CO3)2", "SiO2", "Al2O3"]
+print(model.predict(formulas))
+# ['Trigonal' 'Orthorhombic' 'Hexagonal']   ← output from the notebook run
+```
+
+The saved object is a complete `Pipeline` (vectorizer + classifier), so you can pass raw formula strings directly — no separate feature step is needed.
+
+> ⚠️ Predictions are only as specific as the formula allows. Many compounds exist as several **polymorphs** with the same formula but different crystal systems (SiO₂ is a good example), so a formula-only model cannot always give the "right" answer for a specific sample. Always load the model with the same `scikit-learn` version used for training (1.7.2 in the notebook), or re-train it with `bestmodelfind.ipynb`.
+
+</details>
+
+<details>
+<summary><b>🚧 Limitations & Future Work</b></summary>
+<br>
+
+**Limitations**
+- Formula-only input cannot separate polymorphs; the data contains the same formula with different crystal systems
+- Strong class imbalance (Triclinic 42% vs. Hexagonal 0.7%)
+- The 10,000 materials are the first records returned by the API query, not a random or balanced sample
+- Duplicate formula/system pairs were removed *before* the split, which is good practice, but the same formula can still appear in train and test under a different crystal system
+
+**Future work**
+- 🌲 Train **Random Forest / XGBoost / Gradient Boosting** on the 102 Magpie features in `phase3_ml_dataset.csv` and compare with the TF-IDF model (the features are already prepared in this repository)
+- 🏗️ Add structure-based descriptors from the stored `full_structure` JSON (e.g. `SiteStatsFingerprint`, as used in Module 3 S07)
+- ⚖️ Handle imbalance with resampling or class-specific thresholds; report per-class confidence
+- 🔬 Extend the target from 7 crystal systems to **space group** (already collected in the dataset)
+- 🧪 Use grouped cross-validation by composition family to test generalization to unseen chemistries
+
+</details>
+
+<details>
+<summary><b>▶️ How to Reproduce</b></summary>
+<br>
+
+```bash
+pip install mp-api pymatgen matminer scikit-learn pandas numpy matplotlib joblib python-dotenv
+```
+
+```text
+1. dataacquisition.ipynb              → materials_full_structure_data.csv
+2. datacleaning.ipynb                 → materials_cleaned.csv + formal_data_cleaning_report.txt
+3. chemicalformulatonummatrix.ipynb   → 132 Magpie features
+4. variationfilter_and_corination.ipynb → matminer_magpie_features.csv (102 features)
+5. bestmodelfind.ipynb                → best_crystal_system_model.joblib + crystal_system_predictions.csv
+```
+
+🔐 **API key:** load the Materials Project key from an environment variable instead of writing it in the notebook (same `.env` pattern as Module 1 S07):
+
+```python
+import os
+from dotenv import load_dotenv
+load_dotenv()
+API_KEY = os.getenv("MP_API_KEY")
+```
+
+> 📌 Notebooks 2–5 read `materials_project_cleaning/materials_cleaned.csv` by relative path (notebook 4 currently uses an absolute Windows path — change it to your own folder).
+
+</details>
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
@@ -114,18 +355,48 @@
  ├── 📁 Module_4
  │   │
  │   ├── 📓 Notebooks
- │   │   ├── 📓 Module 4 S01.ipynb
- │   │   └── 📓 Module 4 S02.ipynb
+ │   │   ├── 📓 Module 4 S03.ipynb
+ │   │   ├── 📓 Module 4 S04.ipynb
+ │   │   ├── 📓 Module 4 S05.ipynb
+ │   │   └── 📓 Module 4 S06.ipynb
  │   │
  │   └── 📊 Data
  │       │
- │       ├── 🔴 Linear vs. Ridge Regression for Cp Prediction (S01)
- │       │   ├── 📊 cp_data_demo.csv (Input — raw Formula, Temperature, Heat_Capacity)
- │       │   └── 🖼️ ridge_alpha_sweep.png (Output — α vs. test R² plot)
+ │       ├── 🔴 Standalone Linear vs. Ridge Re-run of the S01 Pipeline (S03)
+ │       │   ├── 📊 cp_data_demo.csv (Input — same raw file as S01)
+ │       │   └── 🖼️ ridge_alpha_sweep.png (Output — same plot as S01, regenerated)
  │       │
- │       └── 🔴 Regularization Comparison: LR vs. Ridge vs. Lasso vs. ElasticNet (S02)
- │           ├── 📊 cp_data_demo.csv (Input — same raw file as S01)
- │           └── 📊 regularization_comparison_s26.csv (Output — 4 models × R², RMSE, MAE)
+ │       ├── 🔴 Consolidated Linear / Ridge / Lasso / ElasticNet Notebook (S04)
+ │       │   ├── 📊 cp_data_demo.csv (Input — same raw file as S01)
+ │       │   ├── 🖼️ ridge_alpha_sweep.png (Output — regenerated by the embedded S01 cell)
+ │       │   └── 📊 regularization_comparison_s26.csv (Output — same 4 × 3 table as S02)
+ │       │
+ │       ├── 🔴 Model Comparison Diagnostics: R² vs. RMSE and RMSE vs. MAE (S05)
+ │       │   └── 📊 regularization_comparison_s26.csv (Input — table produced by S02 / S04; no file output)
+ │       │
+ │       └── 🔴 SVR (RBF Kernel) Baseline for Cp Prediction (S06)
+ │           └── 📊 cp_data_demo.csv (Input — same raw file as S01; no file output)
+ │
+ ├── 📁 Project_Crystal_System_Prediction
+ │   │
+ │   ├── 📓 Notebooks
+ │   │   ├── 📓 dataacquisition.ipynb
+ │   │   ├── 📓 datacleaning.ipynb
+ │   │   ├── 📓 chemicalformulatonummatrix.ipynb
+ │   │   ├── 📓 variationfilter_and_corination.ipynb
+ │   │   └── 📓 bestmodelfind.ipynb
+ │   │
+ │   ├── 📊 Data
+ │   │   ├── 📊 raw_backup_materials_full_structure_data.csv
+ │   │   ├── 📊 materials_cleaned.csv
+ │   │   ├── 📊 materials_with_magpie_features.csv
+ │   │   ├── 📊 matminer_magpie_features.csv
+ │   │   ├── 📊 crystal_system_target.csv
+ │   │   ├── 📊 phase3_ml_dataset.csv
+ │   │   ├── 📊 crystal_system_predictions.csv
+ │   │   └── 📄 formal_data_cleaning_report.txt
+ │   │
+ │   └── 🧠 best_crystal_system_model.joblib
  │
  └── 📄 README.md
 ```
@@ -913,110 +1184,84 @@ This notebook (Module 3, Session 07) moves beyond purely **compositional** descr
 <img src="https://user-images.githubusercontent.com/74038190/213910845-af37a709-8995-40d6-be59-724526e3c3d7.gif" width="500">
 </div>
 
-<details open>
-<summary><b>📓 Module 4 S01.ipynb — 📈 Linear vs. Ridge Regression for Heat Capacity (Cp) Prediction</b></summary>
+<details>
+<summary><b>📓 Module 4 S03.ipynb — 🔁 Standalone Linear vs. Ridge Pipeline (S01 Code Re-run)</b></summary>
 <br>
 
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
-<img src="https://img.shields.io/badge/-Scikit--Learn-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Linear%20Regression-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Ridge%20Regression-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-L2%20Regularization-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Alpha%20Hyperparameter%20Sweep-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Formula%20Featurization-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-GroupShuffleSplit-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-StandardScaler%20Pipeline-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-R%C2%B2%20Model%20Evaluation-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib%20Visualization-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
+<img src="https://img.shields.io/badge/-Scikit--Learn-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Linear%20Regression-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Ridge%20Regression-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Alpha%20Hyperparameter%20Sweep-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Formula%20Featurization-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-GroupShuffleSplit-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-StandardScaler%20Pipeline-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Reproducible%20Experiments-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-This notebook (Module 4, Session 01) is the first **supervised machine-learning** session of the course. It predicts **heat capacity (Cp)** from a material's **chemical formula and temperature**, then compares an **unregularized Linear Regression baseline** against **Ridge Regression** across a sweep of regularization strengths (α).
+This notebook (Module 4, Session 03) is a **single, self-contained code cell** that runs the complete S01 pipeline from raw `cp_data_demo.csv` to the saved α-sweep plot — there are no markdown cells and no new modelling step. The code matches the S01 pipeline described above (the only difference is whitespace), and it produces **exactly the same numbers and the same `ridge_alpha_sweep.png`**. It is the cell that S04 and S06 embed to rebuild `X_train`, `X_test`, `y_train`, `y_test`, `lr` and `best_alpha` in memory.
 
-**Workflow:**
-1. Load the raw `cp_data_demo.csv` (`Formula`, `Temperature`, `Heat_Capacity`) and drop rows with a missing value in any of those three columns
-2. **Featurize each formula** with a hand-built parser: a regex converts strings such as `Al2Be1O4` into element counts, which are combined with built-in atomic-mass and electronegativity lookup tables (40 elements) into `n_atoms`, `n_elements`, `mean_mass`, `mean_EN`, and one atomic-fraction column `frac_<element>` per element
-3. Build the model inputs: `X` = composition features + `Temperature`, `y` = `Heat_Capacity`
-4. Split 80/20 with **`GroupShuffleSplit`** (`test_size=0.2`, `random_state=42`), **grouped by `Formula`**, so every row of a given material lands entirely in train *or* test — the model is evaluated on materials it has never seen
-5. Train the baseline: `make_pipeline(StandardScaler(), LinearRegression())`
-6. Sweep **50 α values** from 0.01 to 100 (`np.logspace(-2, 2, 50)`) with `make_pipeline(StandardScaler(), Ridge(alpha=α))`, recording test R² for each
-7. Select the α with the highest test R², then plot the sweep (log-scaled α axis, baseline as a red dashed line, best α as a green dotted line) and save it as `ridge_alpha_sweep.png` at 300 dpi
+**Workflow (same as S01):**
+1. Load `cp_data_demo.csv` and drop rows with a missing `Formula`, `Temperature` or `Heat_Capacity`
+2. Featurize formulas (regex parser + 40-element mass / electronegativity tables) into `n_atoms`, `n_elements`, `mean_mass`, `mean_EN` and `frac_<element>`; add `Temperature` as a feature
+3. Split 80/20 with `GroupShuffleSplit(random_state=42)`, grouped by `Formula`
+4. Fit `make_pipeline(StandardScaler(), LinearRegression())` as the baseline
+5. Sweep 50 α values (`np.logspace(-2, 2, 50)`) with `make_pipeline(StandardScaler(), Ridge(alpha=α))`
+6. Plot test R² vs. α (log axis) and save it as `ridge_alpha_sweep.png` (300 dpi)
 
 ```text
-📥 cp_data_demo.csv (Formula, Temperature, Heat_Capacity)
-  ↓ (dropna on the 3 required columns)
-  ↓ (Formula → n_atoms, n_elements, mean_mass, mean_EN, frac_<element>)
-  ↓ X = composition features + Temperature   |   y = Heat_Capacity
-  ↓ (GroupShuffleSplit 80/20, groups = Formula, random_state=42)
+📥 cp_data_demo.csv
+  ↓ (dropna → formula featurization → GroupShuffleSplit 80/20 by Formula)
   ↓ Baseline: StandardScaler + LinearRegression      → Train R² 0.910 | Test R² 0.924
   ↓ Ridge α sweep: np.logspace(-2, 2, 50)            → best α = 100.00 | Test R² 0.928
-📤 ridge_alpha_sweep.png ✅
+📤 ridge_alpha_sweep.png ✅ (regenerated)
 ```
 
-**Engineered Features:**
-
-| Feature | Description |
-|---------|-------------|
-| `n_atoms` | Total number of atoms in the formula unit |
-| `n_elements` | Number of distinct elements |
-| `mean_mass` | Atom-weighted mean atomic mass (g/mol) |
-| `mean_EN` | Atom-weighted mean Pauling electronegativity |
-| `frac_<El>` | Atomic fraction of each element (e.g. `frac_O`, `frac_Al`) |
-| `Temperature` | Measurement temperature (K) — a **feature**, not the target |
-
-**Results:**
+**Results (identical to S01):**
 
 | Model | Train R² | Test R² |
 |-------|:--------:|:-------:|
 | Linear Regression (baseline) | 0.910 | 0.924 |
 | Ridge Regression (best α = 100.00) | — | **0.928** |
 
-<div align="center">
-
-<img src="Module_4/Data/ridge_alpha_sweep.png" alt="Ridge Regression: α vs. test R² sweep" width="650"/>
-
-*Test R² rises steadily once α exceeds ~1 and peaks at the upper edge of the sweep (α = 100), clearly above the unregularized baseline.*
-
-</div>
-
-> 💡 **Reading the result:** Ridge improves test R² only slightly (≈ 0.924 → 0.928), so the baseline is already strong. Two things are worth knowing before treating α = 100 as final: **(1)** the best α sits at the *edge* of the searched range and the curve is still rising, so a larger α (e.g. `np.logspace(-2, 4, 50)`) may score higher; **(2)** α is chosen using the *test* set, which makes the 0.928 slightly optimistic — a cross-validated search on the training data (e.g. `GroupKFold` or `RidgeCV`) is the cleaner way to tune it. These are natural follow-ups for the next sessions (S02 below adds cross-validation for the L1 models).
+> 💡 **Reading the result:** The identical outputs in S03, S04 and S06 confirm the experiment is **reproducible** — the fixed `random_state=42` and the formula-grouped split give the same train/test materials and the same metrics on every run. The S01 caveats carry over unchanged: the best α (100.00) is at the upper edge of the sweep and is picked on the test set, so the 0.928 is slightly optimistic. The notebook also ends with an empty trailing cell that can be deleted.
 
 <img src="https://img.shields.io/badge/-Learning%20Outcome-0d1117?style=flat-square&color=8A2BE2"/>
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Turn raw chemical-formula strings into numerical composition features (counts, fractions, weighted mean mass and electronegativity).
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Frame a materials problem as supervised regression: features (`X`) vs. target (`y`).
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Avoid leakage between train and test with a group-aware split (`GroupShuffleSplit`).
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Chain `StandardScaler` and a regressor in a scikit-learn `Pipeline`.
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Understand L2 regularization and tune Ridge's α by sweeping it on a log scale.
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Evaluate and compare models with R², and visualize the comparison with `matplotlib`.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Reproduce a complete regression experiment (featurization → grouped split → baseline → α sweep → plot) in one self-contained cell.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Verify reproducibility: the same seed and grouped split return the same Train R² 0.910 / Test R² 0.924 and best α = 100.00 (Test R² 0.928).
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Understand which in-memory objects (`X_train`, `X_test`, `y_train`, `y_test`, `lr`, `best_alpha`) later sessions depend on.
 
 **📊 Datasets Used & Generated:**
 
 | File | Type | Description |
 |------|------|-------------|
-| `cp_data_demo.csv` | 📥 Input | Raw heat capacity dataset (`Formula`, `Temperature`, `Heat_Capacity`) — original column names, not the standardized `formula`/`T`/`Cp` schema of `cleaned_cp_dataset.csv` |
-| `ridge_alpha_sweep.png` | 📤 Output | Alpha-sweep plot (300 dpi): Ridge test R² vs. α, with the Linear Regression baseline and best α marked |
+| `cp_data_demo.csv` | 📥 Input | Raw heat capacity dataset (`Formula`, `Temperature`, `Heat_Capacity`), same file as S01 |
+| `ridge_alpha_sweep.png` | 📤 Output | Alpha-sweep plot (300 dpi), regenerated — same content as the S01 output |
 
 </details>
 
-<details open>
-<summary><b>📓 Module 4 S02.ipynb — 🧲 Regularization Comparison: Linear vs. Ridge vs. Lasso vs. ElasticNet</b></summary>
+<details>
+<summary><b>📓 Module 4 S04.ipynb — 🧩 Consolidated Regularization Notebook (S01 + S02 in One File)</b></summary>
 <br>
 
 <img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
-<img src="https://img.shields.io/badge/-Scikit--Learn-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Lasso%20Regression%20%28L1%29-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-ElasticNet-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-LassoCV%20%26%20ElasticNetCV-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Sparse%20Feature%20Selection-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Regularization%20Comparison-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-R%C2%B2%2C%20RMSE%20%26%20MAE-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Model%20Comparison%20Table-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-CSV%20Export-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
+<img src="https://img.shields.io/badge/-Scikit--Learn-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Linear%20%2F%20Ridge%20%2F%20Lasso%20%2F%20ElasticNet-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-LassoCV%20%26%20ElasticNetCV-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Sparse%20Feature%20Selection-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Guard%20Cell%20Validation-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-R%C2%B2%2C%20RMSE%20%26%20MAE-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Model%20Comparison%20Table-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-CSV%20Export-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
 
-This notebook (Module 4, Session 02) extends S01 from one regularizer to **four models**. It keeps the exact S01 setup (same featurization, same `GroupShuffleSplit` train/test split, same `lr` baseline and `best_alpha`) and adds **Lasso (L1)** and **ElasticNet (L1 + L2)**, both tuned by 5-fold cross-validation. All four models are scored on the same held-out materials with **R², RMSE and MAE** and saved to a single comparison table.
+This notebook (Module 4, Session 04) packs the **S01 pipeline and the S02 regularization comparison into one runnable notebook** (8 code cells, no markdown). Cell 1 is the S01 code (featurization, grouped split, Linear baseline, Ridge α sweep); the remaining cells are the S02 workflow. Because S01's objects are created in the cell directly above, the guard cell passes without any manual re-run, and the notebook reproduces the **same Lasso / ElasticNet settings and the same 4-model table** as S02.
 
-> 🔗 **Dependency on S01:** the first cell of the notebook re-runs the full S01 code, so `X_train`, `X_test`, `y_train`, `y_test`, `lr` and `best_alpha` exist before S02 starts. A guard cell raises a `NameError` if any of them is missing. (Inside the notebook, S01 is referred to as "S25".) Keep `cp_data_demo.csv` in the folder you run it from.
+> 🔗 **Cell layout:** (1) S01 pipeline → (2) imports for `Lasso`, `ElasticNet`, `LassoCV`, `ElasticNetCV` and the metrics → (3) guard cell checking `X_train`, `X_test`, `y_train`, `y_test`, `lr`, `best_alpha` (its error message says "re-run the S25 cells", i.e. S01) → (4) `LassoCV` → (5) `ElasticNetCV` → (6) `evaluate_model()` → (7) 4-model table + CSV export → (8) empty trailing cell.
 
 **Workflow:**
-1. Re-run the S01 pipeline (formula featurization → `GroupShuffleSplit` 80/20 by `Formula` → Linear Regression baseline → Ridge α sweep) and confirm the shared objects exist
-2. Train **`LassoCV(cv=5, max_iter=10000, random_state=42)`** — it picks α = **7.5731** and forces **42 features to exactly 0** (e.g. `frac_Al`, `frac_B`, `frac_Ba`, `frac_Be`, `frac_Br`, …)
-3. Train **`ElasticNetCV(l1_ratio=[0.1, 0.5, 0.7, 0.9, 0.95, 1.0], cv=5, max_iter=10000)`** — it picks α = **7.5731** and `l1_ratio = 1.0`
-4. Define `evaluate_model()` returning **R²**, **RMSE** (`sqrt(mean_squared_error)`) and **MAE**
-5. Refit `Ridge(alpha=best_alpha)` on `X_train`, then score Linear, Ridge, Lasso and ElasticNet on `X_test` and build the 4-model table
-6. Save the table to `regularization_comparison_s26.csv`
+1. Run the S01 pipeline: featurization → `GroupShuffleSplit` 80/20 by `Formula` → Linear baseline (Train R² 0.910, Test R² 0.924) → Ridge α sweep (best α = 100.00, Test R² 0.928) → `ridge_alpha_sweep.png`
+2. Import `Lasso`, `ElasticNet`, `LassoCV`, `ElasticNetCV` and `r2_score`, `mean_squared_error`, `mean_absolute_error`
+3. Run the guard cell that raises a `NameError` if any S01 object is missing
+4. Train **`LassoCV(cv=5, random_state=42, max_iter=10000)`** → α = **7.5731**, **42 features forced to exactly 0** (sample: `frac_Al`, `frac_B`, `frac_Ba`, `frac_Be`, `frac_Br`)
+5. Train **`ElasticNetCV(l1_ratio=[0.1, 0.5, 0.7, 0.9, 0.95, 1.0], cv=5)`** → α = **7.5731**, `l1_ratio = 1.0`
+6. Score all four models with `evaluate_model()` (R², RMSE, MAE) on the held-out materials and save `regularization_comparison_s26.csv`
 
 ```text
-📥 S01 objects: X_train, X_test, y_train, y_test, lr, best_alpha
-  ↓ (guard cell: raise NameError if any object is missing)
-  ↓ LassoCV(cv=5)                  → α = 7.5731, 42 features zeroed
-  ↓ ElasticNetCV(l1_ratio grid)    → α = 7.5731, l1_ratio = 1.0
-  ↓ Ridge(alpha=best_alpha)        → refit for the comparison
-  ↓ evaluate_model(): R² | RMSE | MAE on the same held-out materials
+📥 cp_data_demo.csv
+  ↓ [cell 1] S01 pipeline            → lr, best_alpha, X_train/X_test/y_train/y_test, ridge_alpha_sweep.png
+  ↓ [cell 3] guard cell              → all objects present ✅
+  ↓ [cell 4] LassoCV(cv=5)           → α = 7.5731, 42 features zeroed
+  ↓ [cell 5] ElasticNetCV(grid)      → α = 7.5731, l1_ratio = 1.0
+  ↓ [cell 7] Ridge(alpha=best_alpha) → refit, then 4-model table
 📤 regularization_comparison_s26.csv ✅ (4 models × 3 metrics)
 ```
 
-**Results (held-out test set, grouped by `Formula`):**
+**Results (identical to S02):**
 
 | Model | R² | RMSE (J/mol·K) | MAE (J/mol·K) |
 |-------|:--:|:--------------:|:-------------:|
@@ -1025,28 +1270,125 @@ This notebook (Module 4, Session 02) extends S01 from one regularizer to **four 
 | Lasso (L1) | 0.8990 | 25.129 | 17.208 |
 | ElasticNet | 0.8990 | 25.129 | 17.208 |
 
-> 💡 **Reading the result:** Unregularized Linear Regression is the best of the four on this split, and no regularizer beat it. That is plausible for a small, well-conditioned feature set, but three details in the notebook are worth knowing before drawing conclusions:
->
-> **(1) Ridge here (0.918) is not the Ridge from S01 (0.928).** S01's 0.928 comes from `make_pipeline(StandardScaler(), Ridge(alpha=α))`. S02 refits `Ridge(alpha=best_alpha)` directly on the *unscaled* `X_train`, so the same α = 100 penalizes the features very differently. The two numbers are not comparable. For a like-for-like table, refit with the scaler: `ridge_best = make_pipeline(StandardScaler(), Ridge(alpha=best_alpha)).fit(X_train, y_train)`.
->
-> **(2) Lasso and ElasticNet are identical** because `ElasticNetCV` selected `l1_ratio = 1.0`, which *is* Lasso. They are one model reported twice, not two independent results.
->
-> **(3) Lasso / ElasticNet are also fitted on unscaled features.** `Temperature` and `mean_mass` are on much larger scales than the 0–1 `frac_<El>` columns, so a single α penalizes them unevenly. This likely explains why so many `frac_*` columns (42) were zeroed. Wrapping both in `make_pipeline(StandardScaler(), ...)` is the usual fix, and the comparison should be re-run afterwards.
+> 💡 **Reading the result:** The numbers match S02 exactly, so the two notebooks are interchangeable for this experiment — S04 is simply the "run everything top to bottom" version. All three S02 caveats still apply: **(1)** the table's Ridge (0.918) is refit on *unscaled* features (`Ridge(alpha=best_alpha)`), so it is not comparable with the scaled-pipeline Ridge from the α sweep (0.928); **(2)** ElasticNet chose `l1_ratio = 1.0`, i.e. it *is* Lasso, so rows 3 and 4 are one model; **(3)** Lasso / ElasticNet are also fitted on unscaled features, which likely explains the 42 zeroed `frac_*` columns. Wrapping the three models in `make_pipeline(StandardScaler(), ...)` and re-running is the recommended fix.
 
 <img src="https://img.shields.io/badge/-Learning%20Outcome-0d1117?style=flat-square&color=8A2BE2"/>
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Understand the difference between L2 (Ridge), L1 (Lasso) and mixed (ElasticNet) regularization.
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Tune Lasso and ElasticNet with cross-validation (`LassoCV`, `ElasticNetCV`) instead of a fixed α.
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Use Lasso's exactly-zero coefficients (`coef_ == 0`) as built-in feature selection.
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Evaluate regressors with R², RMSE and MAE, and build a side-by-side comparison table.
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Check that earlier-session objects exist before reusing them (guard cell).
-<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Recognize when models are not directly comparable (scaled vs. unscaled, ElasticNet collapsing to Lasso).
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Combine a multi-session experiment into one notebook that runs top to bottom without hidden dependencies.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Use a guard cell to confirm that the objects a later step needs actually exist.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Reproduce the 4-model regularization table (Linear, Ridge, Lasso, ElasticNet) and confirm it matches S02.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Spot the scaled-vs-unscaled and ElasticNet-collapses-to-Lasso pitfalls when comparing models.
 
 **📊 Datasets Used & Generated:**
 
 | File | Type | Description |
 |------|------|-------------|
-| `cp_data_demo.csv` | 📥 Input | Same raw heat capacity file as S01 (`Formula`, `Temperature`, `Heat_Capacity`), re-featurized in the notebook's first cell |
-| `regularization_comparison_s26.csv` | 📤 Output | 4 rows (Unregularized LR, Ridge (L2), Lasso (L1), ElasticNet) × 3 columns (`R²`, `RMSE`, `MAE`); the first column is the unnamed model-name index |
+| `cp_data_demo.csv` | 📥 Input | Raw heat capacity dataset (`Formula`, `Temperature`, `Heat_Capacity`), same file as S01 |
+| `ridge_alpha_sweep.png` | 📤 Output | Regenerated by the embedded S01 cell |
+| `regularization_comparison_s26.csv` | 📤 Output | 4 rows (Unregularized LR, Ridge (L2), Lasso (L1), ElasticNet) × 3 columns (`R²`, `RMSE`, `MAE`); first column is the unnamed model-name index |
+
+</details>
+
+<details>
+<summary><b>📓 Module 4 S05.ipynb — 📊 Model Comparison Diagnostics (R² vs. RMSE, RMSE vs. MAE)</b></summary>
+<br>
+
+<img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
+<img src="https://img.shields.io/badge/-Model%20Diagnostics-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Matplotlib%20Subplots-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-R%C2%B2%20vs%20RMSE%20Scatter-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-RMSE%20vs%20MAE%20Grouped%20Bars-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Pandas-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Model%20Comparison%20Table-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
+
+This notebook (Module 4, Session 05) turns the 4-model comparison table from S02 / S04 into **two diagnostic figures**. It does **not** train any model: it reads `regularization_comparison_s26.csv` and visualizes the stored **R², RMSE and MAE** values. (Its title cell reads "Session S27: Diagnostics: Parity & Residual Plots"; the figures actually produced are the metric-comparison plots below.)
+
+**Workflow:**
+1. Import `matplotlib`, `seaborn`, `numpy`, `pandas`
+2. Load `regularization_comparison_s26.csv` and preview it (the model names arrive in an `Unnamed: 0` column because the file was saved with an unnamed index)
+3. Rebuild the same 4 × 3 table as a DataFrame with `Model`, `R2`, `RMSE`, `MAE` columns (the values are typed in from the S02 / S04 results)
+4. Draw a 14 × 6 figure with two panels:
+   - **Left — R² vs. RMSE scatter:** one annotated point per model, grid on
+   - **Right — RMSE vs. MAE grouped bars:** two bars per model, x-labels rotated 25°
+5. Display the figure with `plt.show()` (no image file is saved)
+
+```text
+📥 regularization_comparison_s26.csv (4 models × R², RMSE, MAE)
+  ↓ (load + preview → Unnamed: 0 = model names)
+  ↓ (rebuild DataFrame: Model | R2 | RMSE | MAE)
+  ↓ Panel 1: scatter  R² (x) vs. RMSE (y), annotated per model
+  ↓ Panel 2: grouped bars  RMSE vs. MAE per model
+📤 Two-panel diagnostic figure (displayed, not saved) ✅
+```
+
+**Data plotted:**
+
+| Model | R² | RMSE (J/mol·K) | MAE (J/mol·K) |
+|-------|:--:|:--------------:|:-------------:|
+| Unregularized LR | 0.9238 | 21.826 | 15.009 |
+| Ridge (L2) | 0.9180 | 22.648 | 15.158 |
+| Lasso (L1) | 0.8990 | 25.129 | 17.208 |
+| ElasticNet | 0.8990 | 25.129 | 17.208 |
+
+> 💡 **Reading the plots:** The scatter shows the expected inverse relationship — higher R² goes with lower RMSE — and puts **Unregularized LR in the best corner** (highest R², lowest RMSE and MAE). **Lasso and ElasticNet land on exactly the same point**, so the scatter shows only three visible markers for four models (ElasticNet collapsed to Lasso with `l1_ratio = 1.0`). In the bar panel, MAE is lower than RMSE for every model, which is normal because RMSE weights large errors more heavily. Three small points worth knowing: **(1)** the title promises *parity and residual* plots, but those need per-sample predictions (`y_test` vs. `y_pred`), which this notebook does not have — it compares summary metrics only; **(2)** the table is retyped by hand even though the CSV was just loaded, so it will not update if S02 / S04 are re-run (reading it with `pd.read_csv('regularization_comparison_s26.csv', index_col=0)` avoids that); **(3)** `seaborn` is imported but not used.
+
+<img src="https://img.shields.io/badge/-Learning%20Outcome-0d1117?style=flat-square&color=8A2BE2"/>
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Visualize a model-comparison table with a two-panel `matplotlib` figure (`plt.subplots(1, 2)`).
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Read the R²–RMSE trade-off and compare RMSE against MAE across models.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Annotate scatter points and build grouped bar charts with rotated labels.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Recognize when two models are identical (overlapping points, equal bars) and why.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Understand what parity and residual plots would need: per-sample `y_test` and `y_pred`.
+
+**📊 Datasets Used & Generated:**
+
+| File | Type | Description |
+|------|------|-------------|
+| `regularization_comparison_s26.csv` | 📥 Input | 4 × 3 metric table produced by S02 / S04 (must be in the folder you run the notebook from) |
+| — | 📤 Output | No file saved — the two-panel figure is only displayed |
+
+</details>
+
+<details>
+<summary><b>📓 Module 4 S06.ipynb — 🛰️ SVR (RBF Kernel) Baseline for Heat Capacity Prediction</b></summary>
+<br>
+
+<img src="https://img.shields.io/badge/-Topics%20Covered-0d1117?style=flat-square&color=00C2FF"/>
+<img src="https://img.shields.io/badge/-Scikit--Learn-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Support%20Vector%20Regression%20%28SVR%29-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-RBF%20Kernel-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Non--Linear%20Baseline-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-Feature%20Scaling%20Pitfall-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/> <img src="https://img.shields.io/badge/-R%C2%B2%2C%20RMSE%20%26%20MAE-FF6B6B?style=flat-square&labelColor=0d1117&logoColor=white" height="26"/>
+
+This notebook (Module 4, Session 06) adds the course's first **non-linear model**: a **Support Vector Regressor with an RBF kernel**, trained on the same featurized heat-capacity data and the same grouped train/test split as S01–S04. (Its title cell reads "Session S23: Sine Coulomb Matrix & Custom Features", but no Coulomb-matrix featurization is implemented — the notebook is an SVR baseline.)
+
+**Workflow:**
+1. Import `pandas`, `numpy`, `Ridge`, `train_test_split`, `SVR` and the metrics (`r2_score`, `mean_squared_error`, `mean_absolute_error`)
+2. Re-run the S01 pipeline in one cell (featurization → `GroupShuffleSplit` 80/20 by `Formula` → Linear baseline → Ridge α sweep → `ridge_alpha_sweep.png`) to rebuild `X_train`, `X_test`, `y_train`, `y_test`
+3. Train **`SVR(kernel='rbf')`** with scikit-learn's default hyperparameters on `X_train`
+4. Predict on `X_test`
+5. Report **Test R², RMSE and MAE**
+
+```text
+📥 cp_data_demo.csv
+  ↓ [cell 3] S01 pipeline          → X_train, X_test, y_train, y_test (+ LR 0.924 / Ridge 0.928 reference)
+  ↓ [cell 4] SVR(kernel='rbf').fit(X_train, y_train)
+  ↓ [cell 5] svr_rbf.predict(X_test)
+  ↓ [cell 6] R² | RMSE | MAE
+📊 SVR baseline: Test R² 0.007 ⚠️ (no file output)
+```
+
+**Results (held-out test set, grouped by `Formula`):**
+
+| Model | Test R² | Test RMSE (J/mol·K) | Test MAE (J/mol·K) |
+|-------|:-------:|:-------------------:|:------------------:|
+| Unregularized LR (from S02) | 0.9238 | 21.826 | 15.009 |
+| **SVR (RBF, defaults)** | **0.007** | **78.811** | **54.455** |
+
+> ⚠️ **Reading the result:** An R² of ≈ 0 means this SVR predicts barely better than the mean of the training targets, and its RMSE (78.8) is roughly the spread of `Heat_Capacity` itself — so this number reflects a **mis-configured baseline, not what SVR can do** on this problem. The notebook's own comment says the data is "previously scaled", but `X_train` / `X_test` here are the **raw, unscaled** DataFrames (S01 applies `StandardScaler` *inside* its `lr` / `Ridge` pipelines, not to `X_train`). The RBF kernel is distance-based, so unscaled `Temperature` and `mean_mass` swamp the 0–1 `frac_<El>` columns, and the default `C=1.0` is very small for a target in the hundreds of J/mol·K. The usual fix is `make_pipeline(StandardScaler(), SVR(kernel='rbf', C=..., epsilon=...))`, followed by tuning `C` and `gamma` (e.g. with `GridSearchCV` and `GroupKFold`). The notebook itself flags scaling as the next step ("to be explored deeply in S30").
+
+<img src="https://img.shields.io/badge/-Learning%20Outcome-0d1117?style=flat-square&color=8A2BE2"/>
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Train a Support Vector Regressor with an RBF kernel on a featurized materials dataset.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Evaluate a non-linear model with R², RMSE and MAE on materials the model has not seen.
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Understand why distance-based models (SVR, RBF) need scaled features, and why default hyperparameters can give a near-zero R².
+<img src="https://img.shields.io/badge/-%E2%9C%93-0d1117?style=flat-square&color=00C2FF" height="20"/> Compare a non-linear baseline against the linear models from S01–S04.
+
+**📊 Datasets Used & Generated:**
+
+| File | Type | Description |
+|------|------|-------------|
+| `cp_data_demo.csv` | 📥 Input | Raw heat capacity dataset (`Formula`, `Temperature`, `Heat_Capacity`), same file as S01 |
+| `ridge_alpha_sweep.png` | 📤 Side effect | Regenerated by the embedded S01 cell (not part of the SVR analysis) |
+| — | 📤 Output | No result file saved — SVR metrics are printed only |
 
 </details>
 
@@ -1066,9 +1408,11 @@ This notebook (Module 4, Session 02) extends S01 from one regularizer to **four 
 | 📒 Jupyter Notebook      | Interactive Coding               |
 | 🌐 Materials Project API | Materials Data Retrieval         |
 | 🔬 MPRester              | Materials Project Python Client  |
-| 🤖 Scikit-Learn          | Preprocessing, Feature Selection, Regression Models (Linear, Ridge, Lasso, ElasticNet), Cross-Validated Tuning, Pipelines & Evaluation (R², RMSE, MAE) |
+| 🤖 Scikit-Learn          | Preprocessing, Feature Selection, Regression Models (Linear, Ridge, Lasso, ElasticNet, SVR), Cross-Validated Tuning, Pipelines & Evaluation (R², RMSE, MAE) |
 | 🧬 Matminer              | Compositional & Structural Featurization |
 | 📋 ydata-profiling       | Automated Dataset Profiling      |
+| 💎 Pymatgen              | Chemical Composition & Crystal Structure Objects |
+| 💾 Joblib                | Saving / Loading the Trained Crystal-System Model |
 | 🌳 Git                   | Version Control                  |
 
 </div>
@@ -1095,8 +1439,10 @@ This notebook (Module 4, Session 02) extends S01 from one regularizer to **four 
 | **3** | **S05** | `cleaned_cp_dataset.csv` | `matminer_magpie_features.csv` ✅ / `matminer_deml_features.csv` ✅ | - | 4,564 × 133 / 4,564 × 81 |
 | **3** | **S06** | `filtered_features_s20.csv` | `curated_features_s21.csv` ✅ / `rfe_random_forest_importance_s21.csv` ✅ | - | 4,564 × 21 |
 | **3** | **S07** | `perovskites_data.csv` | `structural_features_s22.csv` ✅ (SiteStatsFingerprint + Bag of Bonds) | - | 4,719 × N |
-| **4** | **S01** | `cp_data_demo.csv` | `ridge_alpha_sweep.png` ✅ + Linear/Ridge R² metrics (Test R² 0.924 → 0.928) | - | - |
-| **4** | **S02** | `cp_data_demo.csv` | `regularization_comparison_s26.csv` ✅ (LR / Ridge / Lasso / ElasticNet: R², RMSE, MAE) | 289 B | 4 × 3 |
+| **4** | **S03** | `cp_data_demo.csv` | `ridge_alpha_sweep.png` ✅ (S01 pipeline re-run; same metrics: Test R² 0.924 → 0.928) | - | - |
+| **4** | **S04** | `cp_data_demo.csv` | `regularization_comparison_s26.csv` ✅ (S01 + S02 in one notebook; same table as S02) | 289 B | 4 × 3 |
+| **4** | **S05** | `regularization_comparison_s26.csv` | R² vs. RMSE scatter + RMSE vs. MAE bars (displayed, no file output) ✅ | - | 4 × 3 |
+| **4** | **S06** | `cp_data_demo.csv` | SVR (RBF) baseline metrics: Test R² 0.007 / RMSE 78.81 / MAE 54.46 ⚠️ (printed, no file output) | - | - |
 
 **Legend:** ✅ = ML-Ready / Complete | ⚠️ = Incomplete / Debug Session | 📥 = Input | 📤 = Output | 📊 = Visualization
 
@@ -1132,7 +1478,7 @@ This notebook (Module 4, Session 02) extends S01 from one regularizer to **four 
 <img src="https://img.shields.io/badge/-Elemental%20Property%20Extraction-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Periodic%20Table%20Mapping-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Chemical%20Formula%20Parsing-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Statistical%20Aggregation-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Elemental%20Feature%20Vectors-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Compositional%20Descriptors-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Feature%20Engineering%20for%20ML-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-ML--ready%20Data%20Preparation-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Scikit--Learn%20Linear%20Regression-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Materials%20Informatics-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Predictive%20Modeling-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Recursive%20Feature%20Elimination-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Random%20Forest%20Feature%20Importance-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Structural%20Featurization-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-SiteStatsFingerprint-0d1117?style=flat-square&color=FFA726" height="26"/> <img src="https://img.shields.io/badge/-Bag%20of%20Bonds-0d1117?style=flat-square&color=FFA726" height="26"/>
 
 ### Module 4
-<img src="https://img.shields.io/badge/-Heat%20Capacity%20Prediction-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Formula%20to%20Feature%20Conversion-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Group--Aware%20Train%2FTest%20Split-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Scikit--Learn%20Pipelines-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Linear%20Regression%20Baseline-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Ridge%20Regression%20%28L2%29-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Hyperparameter%20Sweep-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-R%C2%B2%20Model%20Evaluation-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Lasso%20Regression%20%28L1%29-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-ElasticNet-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Cross--Validated%20Regularization-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-RMSE%20%26%20MAE%20Metrics-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Model%20Comparison%20Table-0d1117?style=flat-square&color=FF6B6B" height="26"/>
+<img src="https://img.shields.io/badge/-Heat%20Capacity%20Prediction-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Formula%20to%20Feature%20Conversion-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Group--Aware%20Train%2FTest%20Split-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Scikit--Learn%20Pipelines-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Linear%20Regression%20Baseline-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Ridge%20Regression%20%28L2%29-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Hyperparameter%20Sweep-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-R%C2%B2%20Model%20Evaluation-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Lasso%20Regression%20%28L1%29-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-ElasticNet-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Cross--Validated%20Regularization-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-RMSE%20%26%20MAE%20Metrics-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Model%20Comparison%20Table-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Reproducible%20Experiments-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Model%20Comparison%20Plots-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Support%20Vector%20Regression%20%28SVR%29-0d1117?style=flat-square&color=FF6B6B" height="26"/> <img src="https://img.shields.io/badge/-Feature%20Scaling%20Pitfalls-0d1117?style=flat-square&color=FF6B6B" height="26"/>
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
@@ -1163,9 +1509,16 @@ For Module 3 (Complete Stack — adds feature engineering & structural featuriza
 pip install CBFV matminer pymatgen mp-api python-dotenv scikit-learn
 ```
 
-For Module 4 (Regression modeling — S01 and S02 only need the core scientific stack):
+For Module 4 (Regression modeling — only needs the core scientific stack):
 ```bash
 pip install pandas numpy matplotlib scikit-learn
+```
+
+> 📌 Module 4 S03, S04 and S06 use this stack. S05 additionally imports `seaborn` (already part of the Module 2 stack), so install it if you run S05 on its own: `pip install seaborn`.
+
+For the Crystal System Prediction project:
+```bash
+pip install mp-api pymatgen matminer scikit-learn pandas numpy matplotlib joblib python-dotenv
 ```
 
 **4️⃣ Organize Data Files**
@@ -1183,13 +1536,16 @@ Module_2/Data/cleaned_cp_dataset.csv
 # Feature Engineering (Module 3)
 Module_3/Data/filtered_features_s20.csv
 
-# Regression Modeling (Module 4 S01 and S02 read the RAW heat capacity file)
+# Regression Modeling (Module 4 S03, S04 and S06 read the RAW heat capacity file)
 Module_4/Data/cp_data_demo.csv
+
+# Model Comparison Diagnostics (Module 4 S05 reads the table generated by S04)
+Module_4/Data/regularization_comparison_s26.csv
 ```
 
-> 📌 Module 4 S01 loads `cp_data_demo.csv` with a relative path, so keep it in the same folder you run the notebook from (or update the path in the first cell). The generated `ridge_alpha_sweep.png` is saved to that same folder.
+> 📌 Module 4 S03 and S04 load `cp_data_demo.csv` with a relative path, so keep it in the same folder you run the notebook from. S04 contains the full pipeline and the regularization comparison in one notebook, so it needs no other notebook to be run first. The generated `ridge_alpha_sweep.png` and `regularization_comparison_s26.csv` are saved to that same folder. S06 also re-runs the S03 pipeline in one of its cells.
 >
-> 📌 Module 4 S02 re-runs the S01 code in its first cell, so it needs the same `cp_data_demo.csv` in the same folder. The generated `regularization_comparison_s26.csv` is also saved to that folder.
+> 📌 Module 4 S05 reads `regularization_comparison_s26.csv` with a relative path, so run S04 first and keep the generated file in the folder you run S05 from.
 
 **5️⃣ Configure the Materials Project API Key**
 
@@ -1226,9 +1582,11 @@ Open the notebooks and execute the cells one by one. 🎉
 11. Run Module 3 S05 to benchmark Matminer's Magpie vs. Deml compositional featurizers
 12. Run Module 3 S06 to narrow the wide feature matrix down with RFE (Ridge) + Random Forest importance ranking
 13. Run Module 3 S07 to pull crystal structures from the Materials Project and generate structural descriptors (SiteStatsFingerprint & Bag of Bonds)
-14. Run Module 4 S01 to predict heat capacity with Linear vs. Ridge Regression and tune α with a log-scale sweep
-15. Run Module 4 S02 to compare Linear, Ridge, Lasso and ElasticNet on the same split (S01 code is re-run in its first cell)
-16. Use generated feature vectors and materials datasets for downstream ML projects
+14. Run Module 4 S03 to run the full heat-capacity pipeline (formula featurization, grouped split, Linear baseline, Ridge α sweep) in a single self-contained cell
+15. Run Module 4 S04 to run that pipeline and the Linear / Ridge / Lasso / ElasticNet regularization comparison together in one notebook
+16. Run Module 4 S05 (after S04) to visualize the 4-model comparison table with R² vs. RMSE and RMSE vs. MAE plots
+17. Run Module 4 S06 to train an SVR (RBF) baseline on the same split (note: it runs on unscaled features and scores a near-zero R²)
+18. Use generated feature vectors and materials datasets for downstream ML projects
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
@@ -1281,14 +1639,18 @@ flowchart TD
     V12 --> V12B["MPRester Structure Retrieval<br/>SiteStatsFingerprint + Bag of Bonds<br/>structural_features_s22.csv"]
     
     V12B --> MODULE4["<b>📓 MODULE 4 — Machine Learning</b>"]
-    MODULE4 --> V13["📓 Module 4 S01<br/>Linear vs. Ridge Regression"]
-    S --> V13
-    V13 --> V13B["Formula → Composition Features<br/>GroupShuffleSplit + α Sweep<br/>Test R² 0.924 → 0.928"]
+    MODULE4 --> V15["📓 Module 4 S03-S04<br/>Pipeline Re-run & Consolidated Regularization"]
+    S --> V15
+    V15 --> V15B["Same split, same metrics<br/>Reproducible Results<br/>regularization_comparison_s26.csv"]
     
-    V13B --> V14["📓 Module 4 S02<br/>Regularization Comparison"]
-    V14 --> V14B["LR vs Ridge vs Lasso vs ElasticNet<br/>R² / RMSE / MAE<br/>regularization_comparison_s26.csv"]
+    V15B --> V16["📓 Module 4 S05<br/>Model Comparison Diagnostics"]
+    V16 --> V16B["R² vs RMSE Scatter<br/>RMSE vs MAE Bars<br/>(displayed, not saved)"]
     
-    V14B --> ML["🤖 Machine Learning<br/>Model Training & Evaluation"]
+    V15B --> V17["📓 Module 4 S06<br/>SVR RBF Baseline"]
+    V17 --> V17B["Default SVR, unscaled features<br/>Test R² 0.007 ⚠️"]
+    
+    V16B --> ML["🤖 Machine Learning<br/>Model Training & Evaluation"]
+    V17B --> ML
     
     CLEAN1 --> ML
     CLEAN2 --> V08
@@ -1302,8 +1664,9 @@ flowchart TD
     style V08B fill:#FFA726,color:#fff
     style V11B fill:#FFA726,color:#fff
     style V12B fill:#FFA726,color:#fff
-    style V13B fill:#FF6B6B,color:#fff
-    style V14B fill:#FF6B6B,color:#fff
+    style V15B fill:#FF6B6B,color:#fff
+    style V16B fill:#FF6B6B,color:#fff
+    style V17B fill:#FF6B6B,color:#fff
     style FINAL fill:#00C2FF,color:#fff
     style F fill:#66BB6A,color:#fff
     style S fill:#66BB6A,color:#fff
@@ -1385,18 +1748,14 @@ Elemental Feature Vectors & ML-Ready Descriptors ✅
 - ✅ S07: Real crystal structures retrieved for all 4,719 perovskite `Material_ID`s via `MPRester`
 - ✅ S07: `SiteStatsFingerprint` (coordination-number statistics) + `BagofBonds` (bond-length descriptors) structural feature sets
 
-**Regression Modeling (Module 4 S01):**
-- ✅ Raw `cp_data_demo.csv` featurized directly from formula strings (regex parser + mass/electronegativity lookup tables)
-- ✅ Group-aware 80/20 split by `Formula` — no material appears in both train and test
-- ✅ Linear Regression baseline: Train R² 0.910, Test R² 0.924
-- ✅ Ridge α sweep (0.01 → 100, 50 log-spaced values): best α = 100.00, Test R² 0.928
-
-**Regularization Comparison (Module 4 S02):**
-- ✅ Same split and features as S01, so all four models are scored on the same held-out materials
-- ✅ `LassoCV` (5-fold): α = 7.5731, 42 features forced to exactly 0
-- ✅ `ElasticNetCV` (5-fold, 6 `l1_ratio` values): α = 7.5731, `l1_ratio` = 1.0 (identical to Lasso)
-- ✅ Metrics reported as R², RMSE and MAE: LR 0.9238 / 21.83 / 15.01, Ridge 0.9180 / 22.65 / 15.16, Lasso = ElasticNet 0.8990 / 25.13 / 17.21
-- ⚠️ Ridge, Lasso and ElasticNet are fitted on unscaled features here (S01's Ridge used `StandardScaler`), so Ridge 0.918 vs. S01's 0.928 is not like-for-like
+**Regression Modeling, Diagnostics & SVR Baseline (Module 4 S03-S06):**
+- ✅ S03: S01 pipeline re-run as one self-contained cell — identical results (Train R² 0.910, Test R² 0.924; best α = 100.00, Test R² 0.928) and the same `ridge_alpha_sweep.png`
+- ✅ S04: S01 + S02 consolidated in one notebook — `LassoCV` α = 7.5731 (42 features zeroed), `ElasticNetCV` `l1_ratio` = 1.0, and the same 4 × 3 `regularization_comparison_s26.csv` as S02
+- ✅ S05: Two-panel diagnostic figure from the comparison table — R² vs. RMSE scatter and RMSE vs. MAE grouped bars (displayed, not saved)
+- ✅ S05: Unregularized LR is best on all three metrics; Lasso and ElasticNet overlap because they are the same model
+- ✅ S06: SVR (RBF kernel, default hyperparameters) trained on the same split: Test R² 0.007, RMSE 78.811, MAE 54.455
+- ⚠️ S06: SVR is fitted on unscaled features with default `C=1.0`, so the near-zero R² reflects a mis-configured baseline rather than SVR's ceiling — add `StandardScaler` and tune `C` / `gamma`
+- ⚠️ S05's title cell mentions parity and residual plots and S06's title cell mentions a Sine Coulomb Matrix, but neither is implemented in the notebook
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
@@ -1439,7 +1798,7 @@ Datasets are cleaned, validated, and organized by module for seamless machine-le
 │   Size: 86.9 KB | Rows: 4,577 | Columns: 3
 │   Source: Heat capacity demo dataset
 │   Original Columns: Formula, Temperature, Heat_Capacity
-│   Purpose: Raw input for Module 2 S05-S07 (and Module 4 S01-S02)
+│   Purpose: Raw input for Module 2 S05-S07 (and Module 4)
 │
 └── 📊 cleaned_cp_dataset.csv ✅ [ML-READY]
     Size: 95.6 KB | Rows: 4,564 | Columns: 3
@@ -1613,59 +1972,97 @@ Datasets are cleaned, validated, and organized by module for seamless machine-le
     ⚠️ Security: Notebook hardcodes an MPRester API key — replace with an environment variable (.env) before reuse or sharing
 ```
 
-### Module 4 S01: Linear vs. Ridge Regression (Heat Capacity Prediction)
+### Module 4 S03: Standalone Linear vs. Ridge Pipeline (S01 Code Re-run)
 
 ```text
 📁 Module_4/Data/Regression/
 │
 ├── 📊 cp_data_demo.csv [INPUT]
-│   Source: Raw heat capacity demo dataset (same file used in Module 2 S05)
+│   Source: Same raw heat capacity file as S01
 │   Columns: Formula, Temperature, Heat_Capacity
-│   Cleaning in-notebook: dropna on the three columns (no schema renaming)
-│   Purpose: Supervised-learning data — Temperature + formula-derived features → Heat_Capacity
+│   Purpose: Input for a single self-contained cell that rebuilds the full S01 experiment
 │
-└── 🖼️ ridge_alpha_sweep.png [OUTPUT] ✅
-    Output from: 50-point log-spaced α sweep (0.01 → 100) of StandardScaler + Ridge, plt.savefig(dpi=300)
-    Contents: Ridge test R² vs. α (log x-axis)
-              + red dashed line = unregularized Linear Regression baseline (Test R² 0.924)
-              + green dotted line = best α (100.00, Test R² 0.928)
-    Model Setup:
-      ✓ Features: n_atoms, n_elements, mean_mass, mean_EN, frac_<element>, Temperature
-      ✓ Target: Heat_Capacity (J/mol·K)
-      ✓ Split: GroupShuffleSplit(test_size=0.2, random_state=42), groups = Formula
-      ✓ Models: make_pipeline(StandardScaler(), LinearRegression()) vs. make_pipeline(StandardScaler(), Ridge(alpha=α))
-    Quality: ✅ Group-aware evaluation on unseen materials
-             ⚠️ Best α lies at the upper edge of the sweep and is selected on the test set — extend the α range and tune with cross-validation before reporting the final score
+└── 🖼️ ridge_alpha_sweep.png [OUTPUT] ✅ (regenerated)
+    Output from: the same 50-point log-spaced α sweep as S01, plt.savefig(dpi=300)
+    Notebook layout: 1 code cell with the pipeline + 1 empty trailing cell (no markdown)
+    Results printed (identical to S01):
+      ✓ Linear Regression — Train R² 0.910, Test R² 0.924
+      ✓ Optimal Ridge α: 100.00 (Test R² 0.928)
+    Quality: ✅ Reproducible — fixed random_state=42 and formula-grouped split
+             ⚠️ Same S01 caveats: best α at the edge of the sweep and chosen on the test set
 ```
 
-### Module 4 S02: Regularization Comparison (Linear vs. Ridge vs. Lasso vs. ElasticNet)
+### Module 4 S04: Consolidated Regularization Notebook (S01 + S02)
 
 ```text
 📁 Module_4/Data/Regularization/
 │
 ├── 📊 cp_data_demo.csv [INPUT]
-│   Source: Same raw heat capacity file as S01 (re-featurized by S02's first cell)
+│   Source: Same raw heat capacity file as S01
 │   Columns: Formula, Temperature, Heat_Capacity
-│   Purpose: Rebuilds X_train / X_test / y_train / y_test / lr / best_alpha that S02 depends on
+│   Purpose: Feeds the embedded S01 cell (cell 1), which creates every object the S02 cells need
+│
+├── 🖼️ ridge_alpha_sweep.png [OUTPUT] ✅ (regenerated by the embedded S01 cell)
 │
 └── 📊 regularization_comparison_s26.csv [OUTPUT] ✅
     Size: 289 bytes | Rows: 4 | Columns: 4 (model name + R², RMSE, MAE)
-    Output from: evaluate_model() on each fitted model → results DataFrame → results.to_csv() (S02)
-    Header: ,R²,RMSE,MAE   (first column = unnamed model-name index)
-    Contents:
+    Output from: evaluate_model() on each fitted model → results DataFrame → results.to_csv()
+    Notebook layout: 8 code cells (S01 pipeline → imports → guard cell → LassoCV → ElasticNetCV → evaluate_model → table + CSV → empty cell)
+    Contents (identical to S02):
       Model              R²        RMSE      MAE
       Unregularized LR   0.9238    21.826    15.009
       Ridge (L2)         0.9180    22.648    15.158
       Lasso (L1)         0.8990    25.129    17.208
       ElasticNet         0.8990    25.129    17.208
     Model Setup:
-      ✓ Lasso: LassoCV(cv=5, max_iter=10000, random_state=42) → α = 7.5731, 42 features = 0
+      ✓ Lasso: LassoCV(cv=5, random_state=42, max_iter=10000) → α = 7.5731, 42 features = 0
       ✓ ElasticNet: ElasticNetCV(l1_ratio=[0.1, 0.5, 0.7, 0.9, 0.95, 1.0], cv=5) → α = 7.5731, l1_ratio = 1.0
-      ✓ Ridge: Ridge(alpha=best_alpha) from S01, refit for the table
-      ✓ Metrics: R², RMSE (sqrt of MSE), MAE — all on the S01 held-out test materials
-    Quality: ✅ Same group-aware split for all four models
+      ✓ Ridge: Ridge(alpha=best_alpha), refit for the table
+    Quality: ✅ Runs top to bottom with no dependency on another notebook (guard cell passes)
              ⚠️ ElasticNet collapsed to Lasso (l1_ratio = 1.0), so rows 3 and 4 are the same model
-             ⚠️ Ridge/Lasso/ElasticNet fitted on unscaled features (no StandardScaler) — Ridge 0.918 is not comparable with S01's scaled-pipeline 0.928
+             ⚠️ Ridge/Lasso/ElasticNet fitted on unscaled features — Ridge 0.918 is not comparable with the scaled-pipeline 0.928
+```
+
+### Module 4 S05: Model Comparison Diagnostics (R² vs. RMSE, RMSE vs. MAE)
+
+```text
+📁 Module_4/Data/Regularization/
+│
+└── 📊 regularization_comparison_s26.csv [INPUT]
+    Source: Generated by Module 4 S04 — must be in the folder you run S05 from
+    Shape: 4 rows × 4 columns (model names arrive as an `Unnamed: 0` column when read with pd.read_csv)
+    Notebook layout: title cell + imports + load/preview + plotting cell + empty cell
+    Processing: values re-entered into a DataFrame (Model, R2, RMSE, MAE)
+    Output (displayed only — no file saved):
+      ✓ Panel 1: scatter of R² (x) vs. RMSE (y), one annotated point per model
+      ✓ Panel 2: grouped bars of RMSE vs. MAE per model (x-labels rotated 25°)
+    Observations:
+      ✓ Unregularized LR is best on R², RMSE and MAE
+      ✓ Lasso and ElasticNet plot on the same point (identical model)
+    Quality: ⚠️ Title mentions parity & residual plots, which need per-sample predictions that this notebook does not use
+             ⚠️ Metric values are typed in by hand rather than read from the CSV; `seaborn` is imported but unused
+```
+
+### Module 4 S06: SVR (RBF Kernel) Baseline for Heat Capacity Prediction
+
+```text
+📁 Module_4/Data/Regression/
+│
+└── 📊 cp_data_demo.csv [INPUT]
+    Source: Same raw heat capacity file as S01 (featurized by the S01 code cell inside the notebook)
+    Columns: Formula, Temperature, Heat_Capacity
+    Notebook layout: title cell + imports + S01 pipeline cell + SVR fit + predict + evaluate + empty cell
+    Model: SVR(kernel='rbf') with scikit-learn defaults, trained on X_train and scored on X_test
+    Split: GroupShuffleSplit(test_size=0.2, random_state=42), groups = Formula (same as S01-S04)
+    Results printed (no file saved):
+      Test R²    0.007
+      Test RMSE  78.811 J/mol·K
+      Test MAE   54.455 J/mol·K
+    Reference (Module 4 S04, Unregularized LR): R² 0.9238 | RMSE 21.826 | MAE 15.009
+    Quality: ⚠️ X_train / X_test are NOT scaled (the notebook comment says they are) — S01's StandardScaler lives inside its pipelines
+             ⚠️ Default C=1.0 is small for a target in the hundreds of J/mol·K, so the near-zero R² reflects a mis-configured baseline
+             ⚠️ Title cell says "Sine Coulomb Matrix & Custom Features", but no Coulomb-matrix featurization is implemented
+             ➜ Next step: make_pipeline(StandardScaler(), SVR(kernel='rbf', C=..., epsilon=...)) and tune C / gamma with grouped cross-validation
 ```
 
 ---
@@ -1674,7 +2071,7 @@ Datasets are cleaned, validated, and organized by module for seamless machine-le
 
 <div align="center">
 
-`Python Programming` `Pandas Data Analysis` `NumPy Scientific Computing` `Material Science Data Handling` `Materials Project API` `API-Based Data Retrieval` `Perovskite Dataset Creation` `Scientific Visualization` `Dataset Profiling` `Missing Data Handling` `Mean Imputation` `KNN Imputation` `Duplicate & Outlier Detection` `IQR Statistical Analysis` `Domain-Driven Data Cleaning` `Correlation Heatmap Analysis` `Heat Capacity Analysis` `Temperature-Dependent Properties` `Statistical Normality Testing` `Q-Q Plot Analysis` `Material Family Classification` `Line Plot Visualization` `FacetGrid Multi-Panel Plots` `Seaborn Hue-Based Coloring` `Publication-Quality Graphics` `Multi-Family Comparative Analysis` `Elemental Property Extraction` `Periodic Table Mapping` `Chemical Formula Parsing` `Statistical Aggregation` `Compositional Descriptors` `Feature Vector Generation` `Machine Learning Data Preparation` `Scikit-Learn Linear Regression` `Materials Informatics` `Predictive Strength Modeling` `Recursive Feature Elimination (RFE)` `Random Forest Feature Importance` `Structural Featurization` `Crystal Structure Retrieval` `SiteStatsFingerprint` `Bag of Bonds Featurization` `Ridge Regression (L2 Regularization)` `Lasso Regression (L1 Regularization)` `ElasticNet` `Cross-Validated Regularization (LassoCV / ElasticNetCV)` `Sparse Feature Selection` `RMSE & MAE Evaluation` `Model Comparison Tables` `Hyperparameter Sweeps` `Group-Aware Train/Test Splitting` `Scikit-Learn Pipelines` `Model Evaluation with R²` `Heat Capacity Prediction` `Git & GitHub Workflow` `Jupyter Notebook Usage`
+`Python Programming` `Pandas Data Analysis` `NumPy Scientific Computing` `Material Science Data Handling` `Materials Project API` `API-Based Data Retrieval` `Perovskite Dataset Creation` `Scientific Visualization` `Dataset Profiling` `Missing Data Handling` `Mean Imputation` `KNN Imputation` `Duplicate & Outlier Detection` `IQR Statistical Analysis` `Domain-Driven Data Cleaning` `Correlation Heatmap Analysis` `Heat Capacity Analysis` `Temperature-Dependent Properties` `Statistical Normality Testing` `Q-Q Plot Analysis` `Material Family Classification` `Line Plot Visualization` `FacetGrid Multi-Panel Plots` `Seaborn Hue-Based Coloring` `Publication-Quality Graphics` `Multi-Family Comparative Analysis` `Elemental Property Extraction` `Periodic Table Mapping` `Chemical Formula Parsing` `Statistical Aggregation` `Compositional Descriptors` `Feature Vector Generation` `Machine Learning Data Preparation` `Scikit-Learn Linear Regression` `Materials Informatics` `Predictive Strength Modeling` `Recursive Feature Elimination (RFE)` `Random Forest Feature Importance` `Structural Featurization` `Crystal Structure Retrieval` `SiteStatsFingerprint` `Bag of Bonds Featurization` `Ridge Regression (L2 Regularization)` `Lasso Regression (L1 Regularization)` `ElasticNet` `Cross-Validated Regularization (LassoCV / ElasticNetCV)` `Sparse Feature Selection` `RMSE & MAE Evaluation` `Model Comparison Tables` `Hyperparameter Sweeps` `Group-Aware Train/Test Splitting` `Scikit-Learn Pipelines` `Model Evaluation with R²` `Heat Capacity Prediction` `Reproducible ML Experiments` `Model Comparison Plots (R² vs RMSE, RMSE vs MAE)` `Support Vector Regression (SVR)` `Feature Scaling for Distance-Based Models` `Crystal System Classification` `Text-Based Formula Featurization (Char n-gram TF-IDF)` `Magpie Feature Filtering (Variance & Correlation)` `Stratified Cross-Validation` `Imbalanced Classification (Macro F1)` `Model Persistence with Joblib` `Git & GitHub Workflow` `Jupyter Notebook Usage`
 
 </div>
 
@@ -1706,8 +2103,10 @@ Datasets are cleaned, validated, and organized by module for seamless machine-le
 | Module 3 S05 | Matminer Featurization (Magpie & Deml) | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
 | Module 3 S06 | Feature Selection (RFE + Random Forest Importance) | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
 | Module 3 S07 | Structural Featurization (SiteStatsFingerprint & Bag of Bonds) | <img src="https://img.shields.io/badge/DONE-FFA726?style=flat-square&labelColor=0d1117"/> |
-| Module 4 S01 | Linear vs. Ridge Regression for Heat Capacity Prediction | <img src="https://img.shields.io/badge/DONE-FF6B6B?style=flat-square&labelColor=0d1117"/> |
-| Module 4 S02 | Regularization Comparison (Linear vs. Ridge vs. Lasso vs. ElasticNet) | <img src="https://img.shields.io/badge/DONE-FF6B6B?style=flat-square&labelColor=0d1117"/> |
+| Module 4 S03 | Standalone Linear vs. Ridge Pipeline (S01 Code Re-run) | <img src="https://img.shields.io/badge/DONE-FF6B6B?style=flat-square&labelColor=0d1117"/> |
+| Module 4 S04 | Consolidated Regularization Notebook (S01 + S02) | <img src="https://img.shields.io/badge/DONE-FF6B6B?style=flat-square&labelColor=0d1117"/> |
+| Module 4 S05 | Model Comparison Diagnostics (R² vs. RMSE, RMSE vs. MAE) | <img src="https://img.shields.io/badge/DONE-FF6B6B?style=flat-square&labelColor=0d1117"/> |
+| Module 4 S06 | SVR (RBF Kernel) Baseline for Heat Capacity Prediction | <img src="https://img.shields.io/badge/DONE-FF6B6B?style=flat-square&labelColor=0d1117"/> |
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%" height="6">
 
@@ -1730,8 +2129,10 @@ Datasets are cleaned, validated, and organized by module for seamless machine-le
 <td valign="top">
 
 **Module 4 (In Progress)**
-- S01: Linear vs. Ridge Regression for Cp Prediction ✅
-- S02: Regularization Comparison (LR / Ridge / Lasso / ElasticNet) ✅
+- S03: Standalone Linear vs. Ridge Pipeline (S01 Code Re-run) ✅
+- S04: Consolidated Regularization Notebook (S01 + S02) ✅
+- S05: Model Comparison Diagnostics (R² vs. RMSE, RMSE vs. MAE) ✅
+- S06: SVR (RBF Kernel) Baseline ⚠️
 - Scaled, Cross-Validated Ridge Tuning (`RidgeCV` / `GroupKFold`) *(planned)*
 - Classification Models *(planned)*
 - Random Forest & XGBoost *(planned)*
@@ -1768,7 +2169,7 @@ flowchart LR
     I --> J[⚛️ Elemental Features<br/>Module 3]
     J --> K[🔗 Feature Engineering<br/>& Selection]
     K --> N[🏗️ Structural Featurization]
-    N --> L[🤖 Machine Learning<br/>Module 4 — S01–S02 ✅]
+    N --> L[🤖 Machine Learning<br/>Module 4 — S03–S06 ✅]
     L --> M[🚀 AI-Driven<br/>Materials Discovery]
 
     style A fill:#00C2FF,color:#fff
@@ -1791,7 +2192,7 @@ flowchart LR
 
 ### 🧪 AI • Materials • Data • Python • Machine Learning
 
-**Made with 💙 by Murari Singh**
+**Made with 💙 by Murari Kumar**
 
 <img src="https://user-images.githubusercontent.com/74038190/212284158-e840e285-664b-44d7-b79b-e264b5e54825.gif" width="900">
 
