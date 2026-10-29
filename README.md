@@ -360,7 +360,7 @@ API_KEY = os.getenv("MP_API_KEY")
  │   │   ├── 📓 Module 4 S05.ipynb
  │   │   └── 📓 Module 4 S06.ipynb
  │   │
- │   └── 📊 Data
+ │   └── 📊 Project Datasets
  │       │
  │       ├── 🔴 Standalone Linear vs. Ridge Re-run of the S01 Pipeline (S03)
  │       │   ├── 📊 cp_data_demo.csv (Input — same raw file as S01)
